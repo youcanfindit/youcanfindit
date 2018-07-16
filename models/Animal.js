@@ -5,7 +5,7 @@ const animalSchema = new Schema(
   {
     especie: { type: String, required: true },
     breed: { type: String, required: true },
-    name: String,
+    name: {type: String, required: true},
     color: String,
     gender: String,
     chip: String,
