@@ -1,0 +1,33 @@
+<h2>New anuncio</h2>
+<form action="/post/new" method="POST" id="form-container">
+  <label for="animal">Mascota</label>
+  <select name="animal">
+    <option value="" selected>Selecciona una mascota</option>
+    {{#each animals}}
+    <option value="{{this._id}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+
+  <br>
+
+  <label for="description">Descripción</label>
+  <textarea name="description" class="form-control"></textarea>
+
+  <br>
+
+  <label for="date">Fecha de desaparición</label>
+  <input id="date" type="date" name="date" />
+
+  <br>
+
+  <label for="location">Ubicación aproximada</label>
+
+  <br>
+  {{#if message }}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <br><br>
+
+  <button>Crear anuncio</button>
+</form>
