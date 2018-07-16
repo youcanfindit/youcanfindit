@@ -10,7 +10,7 @@ const postSchema = new Schema({
   location: {
       type: {type: String},
       coordinates: [Number]
-  }
+  },
   reward: {type: String}
 })
 
