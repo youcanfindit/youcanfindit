@@ -1,0 +1,9 @@
+{{#each posts}}
+<h2>Post</h2>
+    <p>{{this.animalId.name}}</p>
+    <p>{{this.userId.name}}</p>
+    <p>{{this.description}}</p>
+    <p>{{this.state}}</p>
+
+    <a href="/post/detail/{{this.id}}">Detail</a>
+{{/each}}

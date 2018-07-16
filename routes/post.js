@@ -7,8 +7,8 @@ const {ensureLoggedIn} = require('connect-ensure-login')
 /* GET home page */
 router.get('/', (req, res, next) => {
   Post.find()
-  .populate('User', 'username')
-  .populate('Animal', 'name')
+  .populate('userId', 'username')
+  .populate('animalId', 'name')
   .exec((err, posts) => {
     if (err) {
       next(err)
@@ -21,9 +21,36 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('/detail?:id', (req, res, next) => {
-  res.render('post/detail')
+router.get('/detail/:id', (req, res, next) => {
+  console.log(req.params.id)
+  Post.findById(req.params.id)
+  .populate('userId', 'username')
+  .populate('animalId', 'name')
+  .exec((err, post) => {
+    if (err) {
+      next(err)
+      return
+    }
+
+    console.log(post)
+
+    res.render('post/detail', post)
+  })
 })
+
+/* router.get('/detail/:id', (req, res, next) => {
+  console.log(req.params.id)
+  Post.findById(req.params.id)
+  .then(post => {
+    console.log(post)
+    res.render('post/detail', post)
+  })
+  .catch(error => {
+    console.log(error);
+  });
+})
+ */
+
 
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
   console.log(req.user._id)
