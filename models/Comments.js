@@ -6,7 +6,7 @@ const commentsSchema = new Schema(
     username: { type: Schema.Types.ObjectId, ref: "User", required: true },
     post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
     comment: { type: String, required: true },
-    stars: Array
+    stars: [Number]
   },
   {
     timestamps: {
