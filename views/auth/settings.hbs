@@ -1,0 +1,23 @@
+<h2>Change your details</h2>
+
+<form action="/auth/settings" method="POST" id="form-container" enctype="multipart/form-data">
+  <label for="email">Email address</label>  
+  <input id="email" type="text" name="email" placeholder="Email address">
+
+  <label for="password">Old password</label>
+  <input id="oldPassword" type="password" name="oldPassword" placeholder="Type the old password">
+
+  <label for="password">New password</label>
+  <input id="newPassword" type="password" name="newPassword" placeholder="Type the new password">
+
+  <label for="profilePic">Profile picture</label>  
+  <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+
+
+  {{#if message }}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <button>Change details</button>
+
+</form>

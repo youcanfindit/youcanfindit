@@ -90,4 +90,7 @@ app.use('/post', postRoutes)
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+const animalsRoutes = require("./routes/animals");
+app.use("/animals", animalsRoutes);
+
 module.exports = app;

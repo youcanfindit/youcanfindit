@@ -4,6 +4,7 @@ const authRoutes = express.Router();
 const User = require("../models/User");
 const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/users/" });
+const ensureLogin = require("connect-ensure-login");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -29,9 +30,6 @@ authRoutes.get("/signup", (req, res, next) => {
 
 authRoutes.post("/signup", upload.single("profilePic"), (req, res, next) => {
   const { username, password, email, name } = req.body;
-  // const password = req.body.password;
-  // const email = req.body.email;
-  // const name = req.body.name;
 
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
@@ -54,7 +52,7 @@ authRoutes.post("/signup", upload.single("profilePic"), (req, res, next) => {
       name,
       profilePic: req.file.filename
     });
-    console.log(newUser)
+    console.log(newUser);
     newUser.save(err => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
@@ -68,6 +66,49 @@ authRoutes.post("/signup", upload.single("profilePic"), (req, res, next) => {
 authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
+});
+
+authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
+  res.render("auth/profile", { user: req.user });
+});
+
+authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
+  res.render("auth/settings", { user: req.user });
+});
+
+
+//Sin terminar
+authRoutes.post("/settings", [upload.single("profilePic"), ensureLogin.ensureLoggedIn()], (req, res) => {
+  const { oldPassword, newPassword, email, profilePic } = req.body;
+
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(newPassword, salt);
+  
+  let update = {}
+
+  if(email){
+    update.email
+  }
+
+  if(oldPassword == hashPass) {
+    update.password = hashPass
+  }
+
+  if(profilePic) {
+    update.profilePic = req.file.filename
+  }
+
+  User.findOneAndUpdate(
+    { email: req.user.email },
+    {update},
+    { new: true }
+  ).then(user => {
+    if (err) {
+      res.render("auth/settings", { message: "Something went wrong" });
+    } else {
+      res.redirect("/auth/profile");
+    }
+  });
 });
 
 module.exports = authRoutes;
