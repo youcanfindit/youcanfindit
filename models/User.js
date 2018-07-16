@@ -8,7 +8,7 @@ const userSchema = new Schema(
     name: String,
     profilePic: String,
     email: { type: String, required: true },
-    role: { type: String, default: true, enum: ["admin", "user"]}
+    role: { type: String, default: "user", enum: ["admin", "user"]}
   },
   {
     timestamps: {
