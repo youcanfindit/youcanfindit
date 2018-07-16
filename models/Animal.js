@@ -11,7 +11,7 @@ const animalSchema = new Schema(
     chip: String,
     description: String,
     profilePic: String,
-    username: { type: Schema.Types.ObjectId, ref: "User", required: true }
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true }
   },
   {
     timestamps: {
