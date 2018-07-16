@@ -87,6 +87,12 @@ app.use("/", index);
 const postRoutes = require('./routes/post')
 app.use('/post', postRoutes)
 
+const commentRoutes = require('./routes/comment')
+app.use('/comment', commentRoutes)
+
+const animalRoutes = require('./routes/animal')
+app.use('/animal', animalRoutes)
+
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
