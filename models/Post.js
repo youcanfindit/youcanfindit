@@ -4,7 +4,6 @@ const Schema   = mongoose.Schema
 const postSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
   animalId: {type: Schema.Types.ObjectId, ref: 'Animal'},
-  state: {type: String, required: true, default: 'lost', enum: ['found', 'lost']},
   date: {type: Date, required: true},
   description: {type: String, required: true},
   location: {

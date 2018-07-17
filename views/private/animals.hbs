@@ -1,13 +1,14 @@
 {{#each animals}}
 <h2>Animals</h2>
     <p>Name: {{this.name}}</p>
-    <p>Owner: {{this.userId.username}}</p>
     <p>Description: {{this.description}}</p>
     <p>State: {{this.state}}</p>
 
     <img src="/uploads/animals/{{profilePic}}" alt="{{this.name}}">
     
     <br>
-
+    
+    <a href="/private/animals/editAnimal/{{this.id}}">Edit</a>
+    
     <a href="/animal/detail/{{this.id}}">Detail</a>
 {{/each}}

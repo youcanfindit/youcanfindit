@@ -96,7 +96,7 @@ app.use('/animal', animalRoutes)
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
-const animalsRoutes = require("./routes/animals");
-app.use("/animals", animalsRoutes);
+const privateRoutes = require("./routes/private");
+app.use("/private", privateRoutes);
 
 module.exports = app;
