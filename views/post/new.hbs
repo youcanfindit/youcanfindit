@@ -22,7 +22,7 @@
   <br>
 
   <label for="location">Ubicación aproximada</label>
-  <input id="geocomplete" type="text" placeholder="Escribe una direccion" value="Madrid" />
+  <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" value="Madrid" />
   <input id="find" type="button" value="Buscar" />
   <br>
   <div style="height: 200px; width: 400px" id="post-location"></div>
@@ -35,7 +35,7 @@
 
   <br><br>
 
-  <button>Crear anuncio</button>
+  <button id="new">Crear anuncio</button>
 </form>
 {{/unless}}
 {{#if noAnimals}}

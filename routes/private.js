@@ -39,7 +39,7 @@ router.post("/animals/editAnimal/:id", [upload.single("profilePic"), ensureLogge
       state,
       description,
     };
-    
+
     if(req.file) {
       let profilePic = req.file.filename;
       animalInfo.profilePic = profilePic
@@ -57,7 +57,7 @@ router.post("/animals/editAnimal/:id", [upload.single("profilePic"), ensureLogge
   router.get(('/animals/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
     const userId = req.user._id
     const animalId = req.params.id
-  
+
     Animal.findById(animalId)
     .exec((err, animal) => {
       console.log(animal)
@@ -100,19 +100,24 @@ router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next
 router.post("/posts/editPost/:id", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
   console.log(req.params.id)
   let id = req.params.id
-  let { animal, description, date, location } = req.body;
+  let { animal, description, date, lat, lng } = req.body;
+  let literal = req.body.formatted_address
   let postInfo = {
     animal,
     description,
-    date,
-    location
-  };
-  
+    date/*,
+    location: {
+      lat,
+      lng,
+      literal
+    }*/
+  }
+
   if(req.file) {
     let profilePic = req.file.filename;
     animalInfo.profilePic = profilePic
   }
-  
+
   Post.findByIdAndUpdate(req.params.id, {$set: postInfo}, { new: true })
   .then(animal => {
     res.redirect("/private/posts");

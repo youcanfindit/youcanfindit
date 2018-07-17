@@ -63,7 +63,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const animalId = req.body.animal;
   console.log(animalId);
 
-  let { description, date, lat, lng } = req.body;
+  let { description, date, lat, lng, literal } = req.body;
 
   Post.findOne({ animalId: animalId }, (err, foundPost) => {
     if (err) {
@@ -84,7 +84,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
       state: "lost",
       date,
       description,
-      location: {type: 'Point', coordinates: [lat, lng]}
+      location: {type: 'Point', coordinates: [lat, lng], literal}
     }
 
     const newPost = new Post(postInfo)
