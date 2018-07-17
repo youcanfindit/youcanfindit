@@ -36,10 +36,6 @@ router.get('/detail/:id', (req, res, next) => {
       res.render('post/detail', {post, comments})
     })
   })
-})
-
-      res.render("post/detail", post);
-    });
 });
 
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
@@ -85,8 +81,6 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
     }
 
     const newPost = new Post(postInfo)
-
-    const newPost = new Post(postInfo);
 
     newPost.save(err => {
       if (err) {
