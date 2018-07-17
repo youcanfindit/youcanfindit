@@ -84,7 +84,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
       state: "lost",
       date,
       description,
-      location: {type: 'Point', coordinates: [lat, lng], literal}
+      location: {type: 'Point', coordinates: [lng, lat], literal}
     }
 
     const newPost = new Post(postInfo)

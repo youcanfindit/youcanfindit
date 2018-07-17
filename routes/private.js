@@ -100,17 +100,16 @@ router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next
 router.post("/posts/editPost/:id", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
   console.log(req.params.id)
   let id = req.params.id
-  let { animal, description, date, lat, lng } = req.body;
-  let literal = req.body.formatted_address
+  let { animal, description, date, lat, lng, literal } = req.body;
   let postInfo = {
     animal,
     description,
-    date/*,
+    date,
     location: {
-      lat,
-      lng,
+      type: 'Point',
+      coordinates: [lng, lat],
       literal
-    }*/
+    }
   }
 
   if(req.file) {

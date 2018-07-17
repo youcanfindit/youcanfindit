@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //   center: {lat: -34.397, lng: 150.644},
     //   zoom: 15
     // })
-    console.log('si')
 
     let pos = {}
 
