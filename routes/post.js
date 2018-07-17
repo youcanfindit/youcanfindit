@@ -29,7 +29,7 @@ router.get('/detail/:id', (req, res, next) => {
       next(err)
       return
     }
-      
+
     Comment.find({postId: post._id})
     .populate('userId', 'username')
     .sort({created_at: -1})
@@ -48,6 +48,11 @@ router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
       return;
     }
 
+    if (animals.length == 0) {
+      res.render('post/new', {noAnimals: 'No tienes mascotas, crea una nueva'})
+      return
+    }
+
     res.render('post/new', {animals})
   })
 })
@@ -58,10 +63,8 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const animalId = req.body.animal;
   console.log(animalId);
 
-  let { description, date } = req.body;
-  // let description = req.body.description
-  // let date = req.body.date
-console.log(date)
+  let { description, date, lat, lng } = req.body;
+
   Post.findOne({ animalId: animalId }, (err, foundPost) => {
     if (err) {
       next(err);
@@ -81,7 +84,7 @@ console.log(date)
       state: "lost",
       date,
       description,
-      location: {type: 'Point', coordinates: [40,10]}
+      location: {type: 'Point', coordinates: [lat, lng]}
     }
 
     const newPost = new Post(postInfo)

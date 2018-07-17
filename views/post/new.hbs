@@ -1,4 +1,5 @@
-<h2>New anuncio</h2>
+<h2>Nuevo anuncio</h2>
+{{#unless noAnimals}}
 <form action="/post/new" method="POST" id="form-container">
   <label for="animal">Mascota</label>
   <select name="animal">
@@ -21,7 +22,12 @@
   <br>
 
   <label for="location">Ubicación aproximada</label>
-
+  <input id="geocomplete" type="text" placeholder="Escribe una direccion" value="Madrid" />
+  <input id="find" type="button" value="Buscar" />
+  <br>
+  <div style="height: 200px; width: 400px" id="post-location"></div>
+  <input type="hidden" id="latitude" name="lat">
+  <input type="hidden" id="longitude" name="lng">
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -31,3 +37,11 @@
 
   <button>Crear anuncio</button>
 </form>
+{{/unless}}
+{{#if noAnimals}}
+<p>
+  {{noAnimals}}
+  <a href="/animal/new">Crear nueva mascota</a>
+</p>
+
+{{/if}}
