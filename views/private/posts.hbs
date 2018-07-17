@@ -1,11 +1,11 @@
 {{#each posts}}
 <h2>Post</h2>
     <p>Animal: {{this.animalId.name}}</p>
-    <p>User: {{this.userId.name}}</p>
     <p>Description: {{this.description}}</p>
-    <p>State: {{this.state}}</p>
+    <p>State: {{animalId.state}}</p>
 
     <a href="/private/posts/editPost/{{this.id}}">Edit</a>
 
     <a href="/post/detail/{{this.id}}">Detail</a>
+    <a href="/private/posts/delete/{{this._id}}">Delete</a>
 {{/each}}

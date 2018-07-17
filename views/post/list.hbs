@@ -1,9 +1,9 @@
 {{#each posts}}
 <h2>Post</h2>
     <p>Animal: {{this.animalId.name}}</p>
-    <p>User: {{this.userId.name}}</p>
+    <p>User: {{this.userId.username}}</p>
     <p>Description: {{this.description}}</p>
-    <p>State: {{this.state}}</p>
+    <p>State: {{animalId.state}}</p>
 
     <a href="/post/detail/{{this.id}}">Detail</a>
 {{/each}}

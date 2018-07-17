@@ -48,7 +48,6 @@ router.post("/new", [upload.single("profilePic"), ensureLoggedIn("/auth/login")]
     console.log(req.body)
 
     let { species, breed, name, color, gender, chip, state, description } = req.body;
-    let profilePic = req.file.filename;
     const animalInfo = {
       species,
       breed,
@@ -61,8 +60,9 @@ router.post("/new", [upload.single("profilePic"), ensureLoggedIn("/auth/login")]
       userId
     };
 
-    if (profilePic) {
-      animalInfo.profilePic = profilePic;
+    if(req.file) {
+      let profilePic = req.file.filename;
+      animalInfo.profilePic = profilePic
     }
     
     const newAnimal = new Animal(animalInfo);

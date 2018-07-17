@@ -1,0 +1,63 @@
+<h2>Edit animal</h2>
+<form action="/private/animals/editAnimal/{{animal._id}}" method="POST" enctype="multipart/form-data">
+
+    <label for="species">Especie</label>
+    <select name="species">
+        <option value="{{animal.species}}" selected>{{animal.species}}</option>
+        <option value="Perro">Perro</option>
+        <option value="Gato">Gato</option>
+        <option value="Ave">Ave</option>
+        <option value="Serpiente">Serpiente</option>
+    </select>
+
+    <br>
+
+    <label for="breed">Breed</label>
+    <textarea name="breed" class="form-control">{{animal.breed}}</textarea>
+
+    <br>
+
+    <label for="name">Name</label>
+    <textarea name="name" class="form-control" required>{{animal.name}}</textarea>
+
+    <br>
+
+    <label for="color">Color</label>
+    <textarea name="color" class="form-control">{{animal.color}}</textarea>
+
+    <br>
+
+    <label for="gender">Gender</label>
+    <textarea name="gender" class="form-control">{{animal.gender}}</textarea>
+
+    <br>
+
+    <label for="chip">Chip</label>
+    <textarea name="chip" class="form-control">{{animal.chip}}</textarea>
+
+    <br>
+
+    <label for="state">State </label>
+    <select name="state">
+        <option value="{{animal.state}}" selected>{{animal.state}}</option>
+        <option value="Lost">Lost</option>
+        <option value="Found">Found</option>
+    </select>
+
+    <br>
+
+    <label for="description">Description</label>
+    <textarea name="description" class="form-control">{{animal.description}}</textarea>
+
+    <br>
+
+    <label for="profilePic">Upload a picture</label>  
+    <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+
+    <br> {{#if message }}
+    <div class="error-message">{{ message }}</div>
+    {{/if}}
+
+
+    <button>Edit animal</button>
+</form>

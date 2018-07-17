@@ -9,13 +9,13 @@ const {ensureLoggedIn} = require('connect-ensure-login')
 router.get("/", (req, res, next) => {
   Post.find()
     .populate("userId", "username")
-    .populate("animalId", "name")
+    .populate("animalId")
     .exec((err, posts) => {
       if (err) {
         next(err);
         return;
       }
-
+      console.log(posts)
     res.render('post/list', {posts})
   })
 })
@@ -29,6 +29,7 @@ router.get('/detail/:id', (req, res, next) => {
       next(err)
       return
     }
+      
     Comment.find({postId: post._id})
     .populate('userId', 'username')
     .sort({created_at: -1})
@@ -36,6 +37,7 @@ router.get('/detail/:id', (req, res, next) => {
       res.render('post/detail', {post, comments})
     })
   })
+
 });
 
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
@@ -57,7 +59,9 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   console.log(animalId);
 
   let { description, date } = req.body;
-
+  // let description = req.body.description
+  // let date = req.body.date
+console.log(date)
   Post.findOne({ animalId: animalId }, (err, foundPost) => {
     if (err) {
       next(err);

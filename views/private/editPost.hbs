@@ -1,0 +1,29 @@
+<h2>Edit post</h2>
+<form action="/private/posts/editPost/{{post._id}}" method="POST" id="form-container">
+  <label for="animal">Mascota</label>
+  <select name="animal">
+    <option value="{{post.animalId.name}}" selected>{{post.animalId.name}}</option>
+  </select>
+
+  <br>
+
+  <label for="description">Descripción</label>
+  <textarea name="description" class="form-control">{{post.description}}</textarea>
+
+  <br>
+
+  <label for="date">Fecha de desaparición</label>
+  <input id="date" type="date" name="date" value="{{post.date}}"/>
+  <br>
+
+  <label for="location">Ubicación aproximada</label>
+
+  <br>
+  {{#if message }}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <br><br>
+
+  <button>Edit post</button>
+</form>

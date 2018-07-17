@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema
 const postSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
   animalId: {type: Schema.Types.ObjectId, ref: 'Animal'},
-  date: {type: Date, required: true},
+  date: {type: String, required: true},
   description: {type: String, required: true},
   location: {
       type: {type: String},
