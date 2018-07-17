@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const Post = require("../models/Post");
-const Animal = require("../models/Animal");
-const { ensureLoggedIn } = require("connect-ensure-login");
+const express = require('express')
+const router  = express.Router()
+const Post = require('../models/Post')
+const Comment = require('../models/Comment')
+const Animal = require('../models/Animal')
+const {ensureLoggedIn} = require('connect-ensure-login')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -15,42 +16,43 @@ router.get("/", (req, res, next) => {
         return;
       }
 
-      console.log(posts);
+    res.render('post/list', {posts})
+  })
+})
 
-      res.render("post/list", { posts });
-    });
-});
-
-router.get("/detail/:id", (req, res, next) => {
-  console.log(req.params.id);
+router.get('/detail/:id', (req, res, next) => {
   Post.findById(req.params.id)
-    .populate("userId", "username")
-    .populate("animalId", "name")
-    .exec((err, post) => {
-      if (err) {
-        next(err);
-        return;
-      }
-
-      console.log(post);
+  .populate('userId', 'username')
+  .populate('animalId', 'name')
+  .exec((err, post) => {
+    if (err) {
+      next(err)
+      return
+    }
+    Comment.find({postId: post._id})
+    .populate('userId', 'username')
+    .sort({created_at: -1})
+    .exec((err, comments) => {
+      res.render('post/detail', {post, comments})
+    })
+  })
+})
 
       res.render("post/detail", post);
     });
 });
 
-router.get("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  console.log(req.user._id);
-  Animal.find({ userId: req.user._id }).exec((err, animals) => {
+router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
+  Animal.find({userId: req.user._id})
+  .exec((err, animals) => {
     if (err) {
       next(err);
       return;
     }
 
-    console.log(animals);
-
-    res.render("post/new", { animals });
-  });
-});
+    res.render('post/new', {animals})
+  })
+})
 
 router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const userId = req.user._id;
@@ -79,8 +81,10 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
       state: "lost",
       date,
       description,
-      location: { type: "Point", coordinates: [40, 10] }
-    };
+      location: {type: 'Point', coordinates: [40,10]}
+    }
+
+    const newPost = new Post(postInfo)
 
     const newPost = new Post(postInfo);
 
