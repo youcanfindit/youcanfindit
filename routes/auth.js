@@ -80,27 +80,42 @@ authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
 //Sin terminar
 authRoutes.post("/settings", [upload.single("profilePic"), ensureLogin.ensureLoggedIn()], (req, res) => {
   const { oldPassword, newPassword, email, profilePic } = req.body;
-
   const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(newPassword, salt);
   
   let update = {}
-
+  
   if(req.body.email){
-    update.email
+    update.email = req.body.email
   }
+  
+  User.findById(req.user.id)
+    .then(user => {
+      console.log(req.user.id)
+      console.log(req.body.oldPassword)
+      console.log(user.password)
 
-  if(oldPassword == hashPass) {
-    update.password = hashPass
-  }
+      if (req.body.oldPassword) {
+        const hashPass = bcrypt.hashSync(newPassword, salt);
+        console.log("pass introduced")
+      bcrypt.compare(oldPassword, user.password, function(err, res) {
+      if(res){
+        console.log("pass ok")
+        update.password = hashPass
+
+        
+      }else {
+        console.log("pass error")
+      }})
+      }
+    })
 
   if(req.file) {
     update.profilePic = req.file.filename
   }
   console.log(update)
-  User.findOneAndUpdate(
-    { email: req.user.email },
-    {$set: {update}},
+  User.findByIdAndUpdate(
+    req.user.id,
+    {$set: update},
     { new: true }
   ).then(user => {
     if (err) {
