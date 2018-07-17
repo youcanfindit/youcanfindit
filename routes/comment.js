@@ -3,6 +3,7 @@ const router  = express.Router()
 const Comment = require('../models/Comment')
 const Post = require('../models/Post')
 const {ensureLoggedIn} = require('connect-ensure-login')
+const roles = require("../utils/roles");
 
 
 router.get('/new/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
@@ -10,13 +11,10 @@ router.get('/new/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
   const postId = req.params.id
   Post.findById(postId)
   .then(post => {
-    console.log(post)
     res.render('comment/new', {post: post})
   })
   .catch()
 })
-
-
 
 router.post('/new/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
   const userId = req.user._id
@@ -43,6 +41,25 @@ router.post('/new/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
     }
 
     res.redirect(`/post/detail/${req.params.id}`)
+  })
+})
+
+router.get(('/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
+  const userId = req.user._id
+  const commentId = req.params.id
+  let postId
+
+  Comment.findById(commentId)
+  .populate('postId', 'userId')
+  .exec((err, comment) => {
+    if (roles.hasRole(req.user, 'admin') || roles.isOwner(req.user, comment.userId) || roles.isOwner(req.user, comment.postId.userId)) {
+      postId = comment.postId._id
+      Comment.findByIdAndRemove(commentId).then(() => {
+        res.redirect(`/post/detail/${postId}`)
+      })
+    } else {
+      res.redirect(`/post/detail/${postId}`)
+    }
   })
 })
 

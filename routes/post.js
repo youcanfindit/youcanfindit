@@ -1,6 +1,7 @@
 const express = require('express')
 const router  = express.Router()
 const Post = require('../models/Post')
+const Comment = require('../models/Comment')
 const Animal = require('../models/Animal')
 const {ensureLoggedIn} = require('connect-ensure-login')
 
@@ -15,14 +16,11 @@ router.get('/', (req, res, next) => {
       return
     }
 
-    console.log(posts)
-
     res.render('post/list', {posts})
   })
 })
 
 router.get('/detail/:id', (req, res, next) => {
-  console.log(req.params.id)
   Post.findById(req.params.id)
   .populate('userId', 'username')
   .populate('animalId', 'name')
@@ -31,37 +29,23 @@ router.get('/detail/:id', (req, res, next) => {
       next(err)
       return
     }
-
-    console.log(post)
-
-    res.render('post/detail', post)
+    Comment.find({postId: post._id})
+    .populate('userId', 'username')
+    .sort({created_at: -1})
+    .exec((err, comments) => {
+      res.render('post/detail', {post, comments})
+    })
   })
 })
-
-/* router.get('/detail/:id', (req, res, next) => {
-  console.log(req.params.id)
-  Post.findById(req.params.id)
-  .then(post => {
-    console.log(post)
-    res.render('post/detail', post)
-  })
-  .catch(error => {
-    console.log(error);
-  });
-})
- */
 
 
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
-  console.log(req.user._id)
   Animal.find({userId: req.user._id})
   .exec((err, animals) => {
     if (err) {
       next(err)
       return
     }
-
-    console.log(animals)
 
     res.render('post/new', {animals})
   })
@@ -94,7 +78,7 @@ router.post('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
       description,
       location: {type: 'Point', coordinates: [40,10]}
     }
-    
+
     const newPost = new Post(postInfo)
 
     newPost.save((err) => {

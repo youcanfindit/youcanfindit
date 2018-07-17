@@ -1,10 +1,25 @@
-<p>{{this.userId.username}}</p>
-<p>{{this.animalId.name}}</p>
+<p>{{post.userId.username}}</p>
+<p>{{post.animalId.name}}</p>
 
 
 
-<p>{{this.description}}</p>
-<p>{{this.animal.state}}</p>
-<p>{{this.date}}</p>
-<p>{{this.location}}</p>
-<p>{{this.reward}}</p>
+<p>{{post.description}}</p>
+<p>{{post.animal.state}}</p>
+<p>{{post.date}}</p>
+<p>{{post.location}}</p>
+<p>{{post.reward}}</p>
+
+{{#each comments}}
+<p>
+  {{this.userId.username}}
+</p>
+<p>
+  {{this.comment}}
+</p>
+<a href="/comment/delete/{{this._id}}">Borrar comentario</a>
+
+
+{{/each}}
+
+
+<a href="/comment/new/{{post._id}}">Nuevo comentario</a>
