@@ -95,7 +95,6 @@ router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next
     res.render("private/editPost", { post });
   });
 });
-// });
 
 
 router.post("/posts/editPost/:id", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {

@@ -1,0 +1,14 @@
+<h2>Editar comentario</h2>
+<form action="/comment/edit/{{post._id}}" method="POST" id="form-container">
+  <label for="comment">Comentario</label>
+  <textarea id="comment" name="comment" class="form-control" required>{{post.comment}}</textarea>
+
+  <br>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <br><br>
+
+  <button>Editar comentario</button>
+</form>

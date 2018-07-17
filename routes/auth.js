@@ -86,7 +86,7 @@ authRoutes.post("/settings", [upload.single("profilePic"), ensureLogin.ensureLog
   
   let update = {}
 
-  if(email){
+  if(req.body.email){
     update.email
   }
 
@@ -94,13 +94,13 @@ authRoutes.post("/settings", [upload.single("profilePic"), ensureLogin.ensureLog
     update.password = hashPass
   }
 
-  if(profilePic) {
+  if(req.file) {
     update.profilePic = req.file.filename
   }
-
+  console.log(update)
   User.findOneAndUpdate(
     { email: req.user.email },
-    {update},
+    {$set: {update}},
     { new: true }
   ).then(user => {
     if (err) {
