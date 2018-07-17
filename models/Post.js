@@ -8,7 +8,8 @@ const postSchema = new Schema({
   description: {type: String, required: true},
   location: {
       type: {type: String},
-      coordinates: [Number]
+      coordinates: [Number],
+      literal: {type: String}
   },
   reward: {type: String}
 })

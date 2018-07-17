@@ -17,6 +17,13 @@
   <br>
 
   <label for="location">Ubicación aproximada</label>
+  <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" value="{{post.location.literal}}"/>
+  <input id="find" type="button" value="Buscar" />
+  <br>
+  <div style="height: 200px; width: 400px" id="post-location"></div>
+  <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
+  <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
+  <br>
 
   <br>
   {{#if message }}
