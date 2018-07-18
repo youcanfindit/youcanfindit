@@ -4,6 +4,10 @@
     <p>User: {{this.userId.username}}</p>
     <p>Description: {{this.description}}</p>
     <p>State: {{animalId.state}}</p>
+
+
+    <a href="/private/posts/editPost/{{this.id}}">Edit</a>
+
     <a href="/post/detail/{{this.id}}">Detail</a>
     {{#if_equal this.userId._id ../user._id}}
     <a href="/private/posts/editPost/{{this.id}}">Edit</a>

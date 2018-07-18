@@ -76,54 +76,61 @@ authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("auth/settings", { user: req.user });
 });
 
+authRoutes.post(
+  "/settings",
+  [upload.single("profilePic"), ensureLogin.ensureLoggedIn()],
+  (req, res) => {
+    const { oldPassword, newPassword, email, profilePic } = req.body;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    let update = {};
 
-//Sin terminar
-authRoutes.post("/settings", [upload.single("profilePic"), ensureLogin.ensureLoggedIn()], (req, res) => {
-  const { oldPassword, newPassword, email, profilePic } = req.body;
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  
-  let update = {}
-  
-  if(req.body.email){
-    update.email = req.body.email
-  }
-  
-  User.findById(req.user.id)
-    .then(user => {
-      console.log(req.user.id)
-      console.log(req.body.oldPassword)
-      console.log(user.password)
-
-      if (req.body.oldPassword) {
-        const hashPass = bcrypt.hashSync(newPassword, salt);
-        console.log("pass introduced")
-      bcrypt.compare(oldPassword, user.password, function(err, res) {
-      if(res){
-        console.log("pass ok")
-        update.password = hashPass
-
-        
-      }else {
-        console.log("pass error")
-      }})
-      }
-    })
-
-  if(req.file) {
-    update.profilePic = req.file.filename
-  }
-  console.log(update)
-  User.findByIdAndUpdate(
-    req.user.id,
-    {$set: update},
-    { new: true }
-  ).then(user => {
-    if (err) {
-      res.render("auth/settings", { message: "Something went wrong" });
-    } else {
-      res.redirect("/auth/profile");
+    if (req.body.email != "") {
+      update.email = req.body.email;
     }
-  });
-});
+
+    if (req.body.oldPassword != "") {
+      User.findById(req.user.id).then(user => {
+        console.log(req.user.id);
+        console.log(req.body.oldPassword);
+        console.log(user.password);
+
+        const hashPass = bcrypt.hashSync(newPassword, salt);
+        if (bcrypt.compareSync(oldPassword, user.password)) {
+          console.log("pass ok");
+          password = hashPass;
+
+          User.findByIdAndUpdate(
+            req.user.id,
+            { $set: { password } },
+            { new: true }
+          ).then(() => {
+            if (res) {
+              res.redirect("/auth/profile");
+            } else {
+              res.render("auth/settings", { message: "Something went wrong" });
+            }
+          });
+        } else {
+          console.log("pass error");
+        }
+      });
+    }
+
+    if (req.file) {
+      update.profilePic = req.file.filename;
+    }
+
+    console.log(update);
+    User.findByIdAndUpdate(req.user.id, { $set: update }, { new: true }).then(
+      () => {
+        if (res) {
+          res.redirect("/auth/profile");
+        } else {
+          res.render("auth/settings", { message: "Something went wrong" });
+        }
+      }
+    );
+  }
+);
 
 module.exports = authRoutes;
