@@ -4,11 +4,11 @@
     {{#each animals}}
     <div class="row">
         <div class="animalWrapper">
-            <p>Name: {{this.name}}</p>
-            <p>Owner: {{this.userId.username}}</p>
-            <p>Description: {{this.description}}</p>
-            <p>State: {{this.state}}</p>
-            <a href="/animal/detail/{{this.id}}">Detail</a>
+            <p>{{{../i18n.__ "Pet"}}}: {{this.name}}</p>
+            <p>{{{../i18n.__ "Owner"}}}: {{this.userId.username}}</p>
+            <p>{{{../i18n.__ "Description"}}}: {{this.description}}</p>
+            <p>{{{../i18n.__ "State"}}}: {{this.state}}</p>
+            <a href="/animal/detail/{{this.id}}">{{{../i18n.__ "Detail"}}}</a>
         </div>
             <div class="images">
                 <img src="{{profilePic}}" alt="{{this.name}}">

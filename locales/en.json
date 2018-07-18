@@ -1,9 +1,10 @@
 {
-    "Pet": "Pet",
-    "Name": "Name",
-    "Owner": "Owner",
-    "Description": "Description",
-    "State": "State",
-    "Lost": "Lost",
-    "Detail": "Detail"
+	"Pet": "Pet",
+	"Name": "Name",
+	"Owner": "Owner",
+	"Description": "Description",
+	"State": "State",
+	"Lost": "Lost",
+	"Detail": "Detail",
+	"{{this.state}}": "{{this.state}}"
 }
