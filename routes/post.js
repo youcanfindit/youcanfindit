@@ -7,35 +7,45 @@ const {ensureLoggedIn} = require('connect-ensure-login')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+  //Guardamos los parametros
+  let species = req.query.species
+  let status = req.query.status
+  let sortBy = req.query.sortBy
+
+  let sortQuery = {}
+  if (sortBy != undefined && sortBy != '') {
+    if (sortBy.toLowerCase() == 'asc' || sortBy.toLowerCase() == 'desc') {
+      sortQuery.updatedAt = sortBy
+    }
+  }
+
   //ORDENAR POR FECHA DE CREACION
   Post.find()
     .populate("userId", "username")
     .populate("animalId")
+    .sort(sortQuery)
     .exec((err, posts) => {
       if (err) {
         next(err);
         return;
       }
-      console.log(posts)
+      if (species != undefined && species != '') {
+        posts = posts.filter(post => {
+          return (post.animalId.species).toLowerCase() === (species.toLowerCase())
+        })
+      }
+
+      if (status != undefined && status != '') {
+        if (status.toLowerCase() == 'open' || status.toLowerCase() == 'closed') {
+          posts = posts.filter(post => {
+            return (post.status).toLowerCase() === (status.toLowerCase())
+          })
+        }
+      }
     res.render('post/list', {posts, user: req.user})
   })
 })
 
-router.get("/:specie", (req, res, next) => {
-  //ORDENAR POR FECHA DE CREACION
-  //FILTRAR POR ESPECIE
-  Post.find()
-    .populate("userId", "username")
-    .populate("animalId")
-    .exec((err, posts) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      console.log(posts)
-    res.render('post/list', {posts, user: req.user})
-  })
-})
 
 router.get('/detail/:id', (req, res, next) => {
   Post.findById(req.params.id)
@@ -49,7 +59,7 @@ router.get('/detail/:id', (req, res, next) => {
 
     Comment.find({postId: post._id})
     .populate('userId', 'username')
-    .sort({created_at: -1})
+    .sort({updatedAt: -1})
     .exec((err, comments) => {
       res.render('post/detail', {post, comments})
     })
@@ -80,7 +90,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const animalId = req.body.animal;
   console.log(animalId);
 
-  let { description, date, lat, lng, literal } = req.body;
+  let { description, date, lat, lng, literal, reward } = req.body;
 
   Post.findOne({ animalId: animalId }, (err, foundPost) => {
     if (err) {
@@ -101,7 +111,9 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
       state: "lost",
       date,
       description,
-      location: {type: 'Point', coordinates: [lng, lat], literal}
+      location: {type: 'Point', coordinates: [lng, lat], literal},
+      reward,
+      status: 'open'
     }
 
     const newPost = new Post(postInfo)

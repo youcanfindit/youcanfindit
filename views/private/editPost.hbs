@@ -24,7 +24,9 @@
   <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
   <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
   <br>
-
+  <label for="location">Recompensa</label>
+  <input type="text" id="reward" name="reward" value="{{post.reward}}">
+  <br>
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>

@@ -11,7 +11,8 @@ const postSchema = new Schema({
       coordinates: [Number],
       literal: {type: String}
   },
-  reward: {type: String}
+  reward: {type: String},
+  status: {type: String, required: true, enum: ['open', 'closed']}
 })
 
 //Establecemos un indice de ordenación por ubicacion
