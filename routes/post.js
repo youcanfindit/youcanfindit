@@ -7,6 +7,7 @@ const {ensureLoggedIn} = require('connect-ensure-login')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+  //ORDENAR POR FECHA DE CREACION
   Post.find()
     .populate("userId", "username")
     .populate("animalId")
@@ -16,7 +17,23 @@ router.get("/", (req, res, next) => {
         return;
       }
       console.log(posts)
-    res.render('post/list', {posts})
+    res.render('post/list', {posts, user: req.user})
+  })
+})
+
+router.get("/:specie", (req, res, next) => {
+  //ORDENAR POR FECHA DE CREACION
+  //FILTRAR POR ESPECIE
+  Post.find()
+    .populate("userId", "username")
+    .populate("animalId")
+    .exec((err, posts) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      console.log(posts)
+    res.render('post/list', {posts, user: req.user})
   })
 })
 

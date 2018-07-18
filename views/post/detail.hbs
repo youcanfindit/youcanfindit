@@ -6,7 +6,9 @@
 <p>{{post.description}}</p>
 <p>{{post.animal.state}}</p>
 <p>{{post.date}}</p>
-<p>{{post.location}}</p>
+<div style="height: 200px; width: 400px" id="post-location" class="detail">
+<input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
+<input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
 <p>{{post.reward}}</p>
 
 {{#each comments}}

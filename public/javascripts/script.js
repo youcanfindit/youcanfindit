@@ -1,12 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   if (document.getElementById('post-location') || document.getElementById('post-location-edit')) {
-    // let map = new google.maps.Map(document.getElementById('post-location'), {
-    //   center: {lat: -34.397, lng: 150.644},
-    //   zoom: 15
-    // })
+    if ($('#post-location').hasClass('new')) {
+      let pos = {}
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
 
-    let pos = {}
+          $('input[name=literal]').val(`${pos.lat},${pos.lng}`)
+          $("#find").click()
+
+        }, function() {});
+      }
+    }
 
     $(function(){
       $("#geocomplete").geocomplete({
@@ -15,15 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
         markerOptions: {
           draggable: true
         },
-        center: {lat: -34.397, lng: 150.644},
-        /*location: {lat: pos.lat, lng: pos.lng},*/
         zoom: 15
     });
 
     $("#geocomplete").bind("geocode:dragged", function(event, latLng){
       $("input[name=lat]").val(latLng.lat());
       $("input[name=lng]").val(latLng.lng());
-      $("#reset").show();
+      $('input[name=literal]').val(`${latLng.lat()},${latLng.lng()}`)
     });
 
 
@@ -31,6 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
       $("#geocomplete").trigger("geocode");
     }).click();
   })
-}
+  }
 
+
+
+  if (document.getElementById('post-location') && $('#post-location').hasClass('detail')) {
+    var myLatlng = new google.maps.LatLng($("input[name=lat]").val(),$("input[name=lng]").val());
+    var mapOptions = {
+      zoom: 15,
+      center: myLatlng,
+      disableDefaultUI: true,
+      draggable: false
+    }
+    var map = new google.maps.Map(document.getElementById("post-location"), mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+    });
+
+    // To add the marker to the map, call setMap();
+    marker.setMap(map);
+  }
 }, false);
