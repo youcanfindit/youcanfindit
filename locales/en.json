@@ -5,6 +5,9 @@
 	"Description": "Description",
 	"State": "State",
 	"Lost": "Lost",
-	"Detail": "Detail",
-	"{{this.state}}": "{{this.state}}"
+    "Detail": "Detail",
+    "Breed": "Breed",
+    "Color": "Color",
+    "Gender": "Gender",
+    "Chip": "Chip"
 }

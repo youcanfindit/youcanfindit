@@ -1,10 +1,12 @@
-<p>Owner: {{this.userId.username}}</p>
-<p>Animal: {{this.name}}</p>
-<p>Breed: {{this.breed}}</p>
-<p>Color: {{this.color}}</p>
-<p>Gender: {{this.gender}}</p>
-<p>Chip: {{this.chip}}</p>
-<p>Description: {{this.description}}</p>
-<p>State: {{this.state}}</p>
+<p>{{{i18n.__ "Owner"}}}: {{animal.userId.username}}</p>
+<p>{{{i18n.__ "Name"}}}: {{animal.name}}</p>
+<p>{{{i18n.__ "Breed"}}}: {{animal.breed}}</p>
+<p>{{{i18n.__ "Color"}}}: {{animal.color}}</p>
+<p>{{{i18n.__ "Gender"}}}: {{animal.gender}}</p>
+<p>{{{i18n.__ "Chip"}}}: {{animal.chip}}</p>
+<p>{{{i18n.__ "Description"}}}: {{animal.description}}</p>
+<p>{{{i18n.__ "State"}}}: {{animal.state}}</p>
 
-<img src="{{profilePic}}" alt="{{this.name}}">
+<img src="{{profilePic}}" alt="{{animal.name}}">
+
+{{{i18n.__ "Pet"}}}

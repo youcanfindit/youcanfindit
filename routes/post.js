@@ -42,7 +42,8 @@ router.get("/", (req, res, next) => {
           })
         }
       }
-    res.render('post/list', {posts, user: req.user})
+    res.cookie("locale", req.params.locale)
+    res.render('post/list', { posts, user: req.user, i18n: res })
   })
 })
 

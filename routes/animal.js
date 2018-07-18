@@ -61,8 +61,8 @@ router.get("/detail/:id", (req, res, next) => {
       }
 
       console.log(animal);
-
-      res.render("animals/detail", animal);
+      res.cookie("locale", req.params.locale)
+      res.render("animals/detail", { animal, i18n: res });
     });
 });
 

@@ -5,5 +5,9 @@
     "Description": "Descripción",
     "State": "Estado",
     "Lost": "Perdido",
-    "Detail": "Detalle"
+    "Detail": "Detalle",
+    "Breed": "Raza",
+    "Color": "Color",
+    "Gender": "Sexo",
+    "Chip": "Chip"
 }
