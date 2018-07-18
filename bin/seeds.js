@@ -1,9 +1,10 @@
+require("dotenv").config();
 const mongoose  = require('mongoose')
 const bcrypt = require('bcrypt')
 const bcryptSalt = 10;
 const User = require('../models/User')
 
-mongoose.connect('mongodb://localhost/you-can-find-it', {useMongoClient: true})
+mongoose.connect(process.env.DBURL, {useMongoClient: true})
 
 const salt = bcrypt.genSaltSync(bcryptSalt);
 
