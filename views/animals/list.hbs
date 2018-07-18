@@ -1,13 +1,18 @@
-{{#each animals}}
-<h2>Animals</h2>
-    <p>Name: {{this.name}}</p>
-    <p>Owner: {{this.userId.username}}</p>
-    <p>Description: {{this.description}}</p>
-    <p>State: {{this.state}}</p>
+<div class="container listWrapper">
+    <h2>Animals</h2>
 
-    <img src="/uploads/animals/{{profilePic}}" alt="{{this.name}}">
-    
-    <br>
-
-    <a href="/animal/detail/{{this.id}}">Detail</a>
-{{/each}}
+    {{#each animals}}
+    <div class="row">
+        <div class="animalWrapper">
+            <p>Name: {{this.name}}</p>
+            <p>Owner: {{this.userId.username}}</p>
+            <p>Description: {{this.description}}</p>
+            <p>State: {{this.state}}</p>
+            <a href="/animal/detail/{{this.id}}">Detail</a>
+        </div>
+            <div class="images">
+                <img src="/uploads/animals/{{profilePic}}" alt="{{this.name}}">
+            </div>
+    </div>
+    {{/each}}
+</div>

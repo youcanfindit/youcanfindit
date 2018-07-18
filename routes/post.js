@@ -21,22 +21,6 @@ router.get("/", (req, res, next) => {
   })
 })
 
-router.get("/:specie", (req, res, next) => {
-  //ORDENAR POR FECHA DE CREACION
-  //FILTRAR POR ESPECIE
-  Post.find()
-    .populate("userId", "username")
-    .populate("animalId")
-    .exec((err, posts) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      console.log(posts)
-    res.render('post/list', {posts, user: req.user})
-  })
-})
-
 router.get('/detail/:id', (req, res, next) => {
   Post.findById(req.params.id)
   .populate('userId', 'username')

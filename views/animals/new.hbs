@@ -1,64 +1,75 @@
-<h2>New animal</h2>
-<form action="/animal/new" method="POST" enctype="multipart/form-data">
+<div class="container newWrapper listWrapper">
+    <h2>New pet</h2>
 
-    <label for="species">Especie</label>
-    <select name="species">
-        <option value="" selected>Especie</option>
-        <option value="Perro">Perro</option>
-        <option value="Gato">Gato</option>
-        <option value="Ave">Ave</option>
-        <option value="Serpiente">Serpiente</option>
+    <div class="formWrapper">
+        <form action="/animal/new" method="POST" enctype="multipart/form-data">
 
-    </select>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="species">Especie</label>
+                    <select name="species" required>
+                        <option value="" selected>Especie</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Ave">Ave</option>
+                        <option value="Serpiente">Serpiente</option>
+                    </select>
+                </div>
 
-    <br>
+                <div class="form-group col-md-6">
+                    <label for="breed">Breed</label>
+                    <input name="breed" class="form-control"></input>
+                </div>
+            </div>
 
-    <label for="breed">Breed</label>
-    <textarea name="breed" class="form-control"></textarea>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="name">Name</label>
+                    <input name="name" class="form-control" required></input>
+                </div>
 
-    <br>
+                <div class="form-group col-md-3">
+                    <label for="color">Color</label>
+                    <input name="color" class="form-control" required></input>
+                </div>
 
-    <label for="name">Name</label>
-    <textarea name="name" class="form-control"></textarea>
+                <div class="form-group col-md-3">
+                    <label for="gender">Gender</label>
+                    <input name="gender" class="form-control"></input>
+                </div>
 
-    <br>
+                <div class="form-group col-md-3">
+                    <label for="chip">Chip</label>
+                    <input name="chip" class="form-control"></input>
+                </div>
+            </div>
 
-    <label for="color">Color</label>
-    <textarea name="color" class="form-control"></textarea>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control"></textarea>
+                </div>
+            </div>
 
-    <br>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="profilePic">Upload a picture</label>
+                    <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+                </div>
+            </div>
 
-    <label for="gender">Gender</label>
-    <textarea name="gender" class="form-control"></textarea>
+            {{#if message }}
+            <div class="error-message">
+                {{ message }}
+            </div>
+            {{/if}}
 
-    <br>
+            <div class="form-row buttonWrapper">
+                <div class="form-group col-md-12">
+                    <button>New pet</button>
+                </div>
+            </div>
 
-    <label for="chip">Chip</label>
-    <textarea name="chip" class="form-control"></textarea>
-
-    <br>
-
-    <label for="state">State </label>
-    <select name="state">
-        <option value="" selected>State</option>
-        <option value="Lost">Lost</option>
-        <option value="Found">Found</option>
-    </select>
-
-    <br>
-
-    <label for="description">Description</label>
-    <textarea name="description" class="form-control"></textarea>
-
-    <br>
-
-    <label for="profilePic">Upload a picture</label>  
-    <input type="file" class="form-control-file" id="profilePic" name="profilePic">
-
-    <br> {{#if message }}
-    <div class="error-message">{{ message }}</div>
-    {{/if}}
-
-
-    <button>New animal</button>
-</form>
+        </form>
+    </div>
+</div>

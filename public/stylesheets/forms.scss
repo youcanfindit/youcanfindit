@@ -1,0 +1,26 @@
+.newWrapper{
+    margin: 50px;
+}
+
+.formWrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    height: 25px;
+    text-align: center;
+}
+
+.buttonWrapper{
+    text-align: center;
+}
+
+#post-location{
+    height: 500px;
+}
+
+.error-message{
+    color: red;
+}

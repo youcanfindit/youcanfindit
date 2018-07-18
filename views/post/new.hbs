@@ -1,47 +1,77 @@
-<h2>Nuevo anuncio</h2>
-{{#unless noAnimals}}
-<form action="/post/new" method="POST" id="form-container">
-  <label for="animal">Mascota</label>
-  <select name="animal">
-    <option value="" selected>Selecciona una mascota</option>
-    {{#each animals}}
-    <option value="{{this._id}}">{{this.name}}</option>
-    {{/each}}
-  </select>
+<div class="container newWrapper listWrapper">
+  <h2>New post</h2>
 
-  <br>
+  {{#unless noAnimals}}
+  <form action="/post/new" method="POST" id="form-container">
+    <div class="formWrapper">
 
-  <label for="description">Descripción</label>
-  <textarea name="description" class="form-control"></textarea>
+      {{#if message }}
+      <div class="error-message">{{ message }}</div>
+      {{/if}}
+      
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="animal">Choose your pet</label>
+          <select name="animal">
+            <option value="" selected>Pets</option>
+            {{#each animals}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
 
-  <br>
+        <div class="form-group col-md-4">
+          <label for="location">Reward</label>
+          <input type="text" id="reward" name="reward">
+        </div>
 
-  <label for="date">Fecha de desaparición</label>
-  <input id="date" type="date" name="date" />
+        <div class="form-group col-md-4">
+          <label for="date">When did you lost it</label>
+          <input id="date" type="date" name="date" />
+        </div>
+      </div>
 
-  <br>
+      <div class="form-row">
+        <div class="form-group col-md-9">
+          <label for="description">Description</label>
+          <textarea name="description" class="form-control"></textarea>
+        </div>
+      </div>
 
-  <label for="location">Ubicación aproximada</label>
-  <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" />
-  <input id="find" type="button" value="Buscar" />
-  <br>
-  <div style="height: 200px; width: 400px" id="post-location" class="new"></div>
-  <input type="hidden" id="latitude" name="lat">
-  <input type="hidden" id="longitude" name="lng">
-  <br>
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="location">Location</label>
+          <input id="geocomplete" type="text" name="literal" placeholder="Type an address" />
+          <input id="find" type="button" value="Buscar" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <div id="post-location" class="new"></div>
+          <input type="hidden" id="latitude" name="lat">
+          <input type="hidden" id="longitude" name="lng">
+        </div>
+      </div>
+
+      <div class="form-row buttonWrapper">
+        <div class="form-group col-md-12">
+          <button>Post</button>
+        </div>
+      </div>
+
+  </form>
+
+  {{/unless}} 
+  {{#if noAnimals}}
+
+  <p>
+    {{noAnimals}}
+    <p>You haven't got any pets yet, create a new pet to post</p>
+    <a href="/animal/new">New pet</a>
+  </p>
+
   {{/if}}
+  </div>
 
-  <br><br>
-
-  <button>Crear anuncio</button>
-</form>
-{{/unless}}
-{{#if noAnimals}}
-<p>
-  {{noAnimals}}
-  <a href="/animal/new">Crear nueva mascota</a>
-</p>
-
-{{/if}}
+</div>
