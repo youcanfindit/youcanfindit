@@ -40,8 +40,13 @@ router.get("/", (req, res, next) => {
           })
         }
       }
-
-      res.render("animals/list", { animals });
+/*       if(req.cookies.i18n == undefined){
+        res.setLocale('es')
+      } else {
+        res.setLocale(req.cookies.i18n);
+      } */
+      res.cookie("locale", req.params.locale)
+      res.render("animals/list", { animals, i18n: res });
     });
 });
 

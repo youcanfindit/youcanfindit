@@ -35,18 +35,36 @@ const app = express();
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
+
+var i18n = require('i18n');
+
+i18n.configure({
+//define how many languages we would support in our application
+locales:['en', 'es'],
+//define the path to language json files, default is /locales
+directory: __dirname + '/locales',
+//define the default language
+defaultLocale: 'en',
+// define a custom cookie name to parse locale settings from 
+cookie: 'i18n'
+});
+
+app.use(cookieParser("i18n_demo"));
+
 
 // Enable authentication using session + passport
 app.use(
   session({
-    secret: "irongenerator",
+    secret: "i18n_demo",
     resave: true,
     saveUninitialized: true,
+    cookie: { maxAge: 60000 },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 app.use(flash());
+
 
 require("./passport")(app);
 
@@ -61,10 +79,13 @@ app.use(
 );
 
 app.set("views", path.join(__dirname, "views"));
+
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "locals")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+
+app.use(i18n.init);
 
 hbs.registerHelper("ifUndefined", (value, options) => {
   if (arguments.length < 2)
@@ -83,6 +104,15 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
         return opts.inverse(this)
     }
 })
+
+hbs.registerHelper('__', function () {
+  console.log("hola")
+  return i18n.__.apply(this, arguments);
+});
+hbs.registerHelper('__n', function () {
+  console.log("adios")
+  return i18n.__n.apply(this, arguments);
+});
 
 
 // default value for title local

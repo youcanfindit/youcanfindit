@@ -1,0 +1,9 @@
+{
+    "Pet": "Mascota",
+    "Name": "Nombre",
+    "Owner": "Dueño",
+    "Description": "Descripción",
+    "State": "Estado",
+    "Lost": "Perdido",
+    "Detail": "Detalle"
+}
