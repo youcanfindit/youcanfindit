@@ -3,7 +3,8 @@ const router = express.Router();
 const Animal = require("../models/Animal");
 const { ensureLoggedIn } = require("connect-ensure-login");
 const multer = require("multer");
-const upload = multer({ dest: "./public/uploads/animals/" });
+// const upload = multer({ dest: "./public/uploads/animals/" });
+const uploadCloud = require("../config/cloudinary.js");
 
 
 router.get("/", (req, res, next) => {
@@ -65,7 +66,7 @@ router.get("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
 });
 
 
-router.post("/new", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
+router.post("/new", [uploadCloud.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
     const userId = req.user._id;
     console.log(userId);
     console.log(req.body)
@@ -84,7 +85,7 @@ router.post("/new", [upload.single("profilePic"), ensureLoggedIn("/auth/login")]
     };
 
     if(req.file) {
-      let profilePic = req.file.filename;
+      let profilePic = req.file.url;
       animalInfo.profilePic = profilePic
     }
 
