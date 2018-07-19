@@ -4,10 +4,11 @@ body {
 
 nav {
   height: 80px;
+  background-color: $nav-color;
 
   img {
     margin-top: 25px;
-    background-color: #2DA547;
+    background-color: $nav-color;
   }
 }
 
@@ -19,11 +20,20 @@ nav {
     margin: 0;
 }
 
+.pictureSection2{
+  background: url(../images/home-bg2.jpg) no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
 .bulletsSectionWrapper{
     margin: 0;
-    background-color: #d7e2ee;
-    height: 400px;
+    background-color: #2A863E;
+    height: 450px;
     padding: 35px;
+    color: #014C12;
+    display: flex;
+    align-items: center;
   }
 
 footer {
@@ -32,7 +42,8 @@ footer {
   height: 60px;
   width: 100vw;
   padding: 12px;
-  background-color: #f8f9fa!important;
+  background-color: #126A25!important;
+  text-align: center;
 }
 
 .btn {

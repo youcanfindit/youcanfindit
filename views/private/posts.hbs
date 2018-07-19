@@ -1,11 +1,19 @@
-{{#each posts}}
-<h2>{{{../i18n.__ "Post"}}}: </h2>
-    <p>{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</p>
-    <p>{{{../i18n.__ "Description"}}}: {{this.description}}</p>
-    <p>{{{../i18n.__ "State"}}}: {{animalId.state}}</p>
+<div class="container listWrapper">
+    <h2>{{{i18n.__ "My posts"}}} </h2>
 
-    <a href="/private/posts/editPost/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
-
-    <a href="/post/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
-    <a href="/private/posts/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete"}}}</a>
-{{/each}}
+    <div class="cardWrapper">
+        {{#each posts}}
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="{{this.animalId.profilePic}}" alt="{{this.animalId.name}}">
+            <div class="card-body">
+                <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</h5>
+                <h5 class="card-title">{{{../i18n.__ "State"}}}: {{animalId.state}}</h5>
+                <h5 class="card-text">{{this.description}}</h5>
+                <a href="/post/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
+                <a href="/private/posts/editPost/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
+                <a href="/private/posts/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete"}}}</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -8,7 +8,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success" id="navbarNav">
+  <nav class="navbar navbar-expand-lg navbar-dark" id="navbarNav">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
         {{#if_equal active 'animals'}}
@@ -112,13 +112,12 @@
 
 
 
-  {{{body}}}
-
+  {{{body}}} {{!--
   <footer>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <p>{{{i18n.__ "You can find it"}}}</p>
     </div>
-  </footer>
+  </footer> --}}
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClr_fVK41OBJxuab_HEI3I30pcijqHB7E&libraries=places"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -129,7 +128,10 @@
     crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
     crossorigin="anonymous"></script>
-  <script src="/javascripts/jquery.geocomplete.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <script src="/javascripts/jquery.geocomplete.js">
+  </script>
   <script src='/javascripts/script.js'></script>
 </body>
 

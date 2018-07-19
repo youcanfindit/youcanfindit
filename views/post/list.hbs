@@ -1,42 +1,45 @@
 <div class="container listWrapper">
 
 
-    <div class="row">
-      <div class="col-7">
-        <h2>{{{i18n.__ "Posts"}}}</h2>
-      </div>
-      <div class="col-1">
-        {{{i18n.__ "Filter"}}}
-      </div>
-      <div class="col-1">
-        <a href="/post?species=dog">{{{i18n.__ "Dog"}}}</a>
-      </div>
-      <div class="col-1">
-        <a href="/post?species=cat">{{{i18n.__ "Cat"}}}</a>
-      </div>
-      <div class="col-1">
-        <a href="/post?status=open">{{{i18n.__ "Open"}}}</a>
-      </div>
-      <div class="col-1">
-        <a href="/post?status=closed">{{{i18n.__ "Closed"}}}</a>
+  <div class="row">
+    <div class="col-6">
+      <h2>{{{i18n.__ "Posts"}}}</h2>
+    </div>
+    <div class="col-1">
+      {{{i18n.__ "Filter"}}}
+    </div>
+    <div class="col-1">
+      <a href="/post?species=dog">{{{i18n.__ "Dog"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/post?species=cat">{{{i18n.__ "Cat"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/post?status=open">{{{i18n.__ "Open"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/post?status=closed">{{{i18n.__ "Closed"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/post">{{{i18n.__ "All"}}}</a>
+    </div>
+  </div>
+
+  <div class="cardWrapper">
+    {{#each posts}}
+
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{this.animalId.profilePic}}" alt="{{this.animalId.name}}">
+      <div class="card-body">
+        <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</h5>
+        <h5 class="card-title">{{{../i18n.__ "State"}}}: {{animalId.state}}</h5>
+        <h5 class="card-text">{{this.description}}</h5>
+        <a href="/post/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
+        {{#if_equal this.userId._id ../user._id}}
+        <a href="/private/posts/editPost/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
+        {{/if_equal}}
       </div>
     </div>
-
-    <div class="cardWrapper">
-      {{#each posts}}
-
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{this.animalId.profilePic}}" alt="{{this.animalId.name}}">
-        <div class="card-body">
-          <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</h5>
-          <h5 class="card-title">{{{../i18n.__ "State"}}}: {{animalId.state}}</h5>
-          <h5 class="card-text">{{this.description}}</h5>
-          <a href="/post/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
-          {{#if_equal this.userId._id ../user._id}}
-          <a href="/private/posts/editPost/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
-          {{/if_equal}}
-        </div>
-      </div>
-      {{/each}}
-    </div>
+    {{/each}}
+  </div>
 </div>

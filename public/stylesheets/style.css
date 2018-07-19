@@ -3,10 +3,11 @@ body {
   font-family: "Open Sans", sans-serif; }
 
 nav {
-  height: 80px; }
+  height: 80px;
+  background-color: #126A25; }
   nav img {
     margin-top: 25px;
-    background-color: #2DA547; }
+    background-color: #126A25; }
 
 .pictureSection {
   background: url(../images/home-bg.jpg) no-repeat;
@@ -15,11 +16,19 @@ nav {
   height: 500px;
   margin: 0; }
 
+.pictureSection2 {
+  background: url(../images/home-bg2.jpg) no-repeat;
+  background-size: cover;
+  height: 500px; }
+
 .bulletsSectionWrapper {
   margin: 0;
-  background-color: #d7e2ee;
-  height: 400px;
-  padding: 35px; }
+  background-color: #2A863E;
+  height: 450px;
+  padding: 35px;
+  color: #014C12;
+  display: flex;
+  align-items: center; }
 
 footer {
   position: fixed;
@@ -27,7 +36,8 @@ footer {
   height: 60px;
   width: 100vw;
   padding: 12px;
-  background-color: #f8f9fa !important; }
+  background-color: #126A25 !important;
+  text-align: center; }
 
 .btn {
   margin: 10px !important; }
@@ -40,13 +50,28 @@ footer {
   display: flex;
   align-items: center; }
 
+.circulo {
+  border: 5px solid #002E0A;
+  border-radius: 35px;
+  width: 70px;
+  height: 70px;
+  padding-top: 20px;
+  margin-bottom: 15px; }
+
+.textCenter {
+  text-align: center; }
+
+i {
+  font-size: 22px;
+  color: #4EA461; }
+
 .listWrapper {
   margin: 80px auto 80px auto !important;
   padding: 50px 100px !important;
   max-width: 1500px !important;
-  background-color: #F8F8F8;
+  background-color: #AFE3BA;
   color: #464D61;
-  box-shadow: 0 10px 15px #CCC;
+  box-shadow: 10px 10px 20px 5px #CCC;
   border-radius: 5px; }
   .listWrapper .cardWrapper {
     display: flex;

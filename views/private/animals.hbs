@@ -1,15 +1,19 @@
-{{#each animals}}
-<h2>{{{../i18n.__ "Pet"}}}</h2>
-    <p>{{{../i18n.__ "Name"}}}: {{this.name}}</p>
-    <p>{{{../i18n.__ "Description"}}}: {{this.description}}</p>
-    <p>{{{../i18n.__ "State"}}}: {{this.state}}</p>
+<div class="container listWrapper">
+    <h2>{{{i18n.__ "My pets"}}}</h2>
 
-    <img src="/uploads/animals/{{profilePic}}" alt="{{this.name}}">
-    
-    <br>
-    
-    <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
-    
-    <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
-    <a href="/private/animals/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete"}}}</a>
-{{/each}}
+    <div class="cardWrapper">
+        {{#each animals}}
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="{{this.profilePic}}" alt="{{this.name}}">
+            <div class="card-body">
+                <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.name}}</h5>
+                <h5 class="card-title">{{{../i18n.__ "Description"}}}: {{this.description}}</h5>
+                <h5 class="card-title">{{{../i18n.__ "State"}}}: {{this.state}}</h5>
+                <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
+                <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
+                <a href="/private/animals/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete"}}}</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

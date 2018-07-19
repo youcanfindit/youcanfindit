@@ -1,7 +1,7 @@
 <div class="container listWrapper">
 
   <div class="row">
-    <div class="col-7">
+    <div class="col-6">
       <h2>{{{i18n.__ "Pet"}}}</h2>
     </div>
     <div class="col-1">
@@ -19,26 +19,29 @@
     <div class="col-1">
       <a href="/animal?status=found">{{{i18n.__ "Found"}}}</a>
     </div>
+    <div class="col-1">
+      <a href="/animal">{{{i18n.__ "All"}}}</a>
+    </div>
   </div>
 
 
 
-    <div class="cardWrapper">
+  <div class="cardWrapper">
 
-      {{#each animals}}
+    {{#each animals}}
 
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{profilePic}}" alt="{{this.name}}">
-        <div class="card-body">
-          <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.name}}</h5>
-          <h5 class="card-title">{{{../i18n.__ "Owner"}}}: {{this.userId.username}}</h5>
-          <h5 class="card-text">{{this.description}}</h5>
-          <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
-          {{#if_equal this.userId._id ../user._id}}
-          <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
-          {{/if_equal}}
-        </div>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{profilePic}}" alt="{{this.name}}">
+      <div class="card-body">
+        <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.name}}</h5>
+        <h5 class="card-title">{{{../i18n.__ "Owner"}}}: {{this.userId.username}}</h5>
+        <h5 class="card-text">{{this.description}}</h5>
+        <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
+        {{#if_equal this.userId._id ../user._id}}
+        <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
+        {{/if_equal}}
       </div>
-      {{/each}}
     </div>
+    {{/each}}
+  </div>
 </div>
