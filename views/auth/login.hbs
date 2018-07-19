@@ -1,21 +1,21 @@
-<h2>Login</h2>
+<h2>{{{i18n.__ "Login"}}}</h2>
 
 <form action="/auth/login" method="POST" id="form-container">
-  <label for="username">Username</label>
+  <label for="username">{{{i18n.__ "Username"}}}</label>
   <input id="username" type="text" name="username" placeholder="User name">
 
 
-  <label for="password">Password</label>
+  <label for="password">{{{i18n.__ "Password"}}}</label>
   <input id="password" type="password" name="password" placeholder="Your password">
 
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <button>Log in</button>
+  <button>{{{i18n.__ "Log in"}}}</button>
 
   <p class="account-message">
-    Don't have an account yet?
-    <a href="/auth/signup">Signup</a>
+    {{{i18n.__ "Don't have an account yet?"}}}
+    <a href="/auth/signup">{{{i18n.__ "Signup"}}}</a>
   </p>
 </form>

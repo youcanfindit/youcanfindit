@@ -1,11 +1,11 @@
-<p>{{post.userId.username}}</p>
-<p>{{post.animalId.name}}</p>
+<p>{{{i18n.__ "Owner"}}}: {{post.userId.username}}</p>
+<p>{{{i18n.__ "Name"}}}: {{post.animalId.name}}</p>
 
 
 
-<p>{{post.description}}</p>
-<p>{{post.animal.state}}</p>
-<p>{{post.date}}</p>
+<p>{{{i18n.__ "Description"}}}: {{post.description}}</p>
+<p>{{{i18n.__ "State"}}}: {{post.animal.state}}</p>
+<p>{{{i18n.__ "Date"}}}: {{post.date}}</p>
 <div style="height: 200px; width: 400px" id="post-location" class="detail">
 <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
 <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
@@ -18,11 +18,11 @@
 <p>
   {{this.comment}}
 </p>
-<a href="/comment/delete/{{this._id}}">Borrar comentario</a>
-<a href="/comment/edit/{{this._id}}">Editar comentario</a>
+<a href="/comment/delete/{{this._id}}">{{{../i18n.__ "Delete comment"}}}</a>
+<a href="/comment/edit/{{this._id}}">{{{../i18n.__ "Edit comment"}}}</a>
 
 
 {{/each}}
 
 
-<a href="/comment/new/{{post._id}}">Nuevo comentario</a>
+<a href="/comment/new/{{post._id}}"{{{i18n.__ "New comment"}}}></a>

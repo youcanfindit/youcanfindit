@@ -13,7 +13,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 authRoutes.get("/login", (req, res, next) => {
-  res.render("auth/login", { message: req.flash("error") });
+  res.render("auth/login", { message: req.flash("error"), i18n: res });
 });
 
 authRoutes.post(
@@ -27,20 +27,20 @@ authRoutes.post(
 );
 
 authRoutes.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  res.render("auth/signup", { i18n: res });
 });
 
 authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) => {
   const { username, password, email, name } = req.body;
 
   if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+    res.render("auth/signup", { message: "Indicate username and password" , i18n: res });
     return;
   }
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", { message: "The username already exists", i18n: res });
       return;
     }
 
@@ -57,9 +57,9 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
     console.log(newUser);
     newUser.save(err => {
       if (err) {
-        res.render("auth/signup", { message: "Something went wrong" });
+        res.render("auth/signup", { message: "Something went wrong", i18n: res });
       } else {
-        res.redirect("/");
+        res.redirect("/", { i18n: res });
       }
     });
   });
@@ -67,15 +67,15 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/", { i18n: res });
 });
 
 authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("auth/profile", { user: req.user });
+  res.render("auth/profile", { user: req.user, i18n: res });
 });
 
 authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("auth/settings", { user: req.user });
+  res.render("auth/settings", { user: req.user, i18n: res });
 });
 
 authRoutes.post(
@@ -107,9 +107,9 @@ authRoutes.post(
             { new: true }
           ).then(() => {
             if (res) {
-              res.redirect("/auth/profile");
+              res.redirect("/auth/profile", { i18n: res });
             } else {
-              res.render("auth/settings", { message: "Something went wrong" });
+              res.render("auth/settings", { message: "Something went wrong", i18n: res });
             }
           });
         } else {
@@ -126,9 +126,9 @@ authRoutes.post(
     User.findByIdAndUpdate(req.user.id, { $set: update }, { new: true }).then(
       () => {
         if (res) {
-          res.redirect("/auth/profile");
+          res.redirect("/auth/profile", { i18n: res });
         } else {
-          res.render("auth/settings", { message: "Something went wrong" });
+          res.render("auth/settings", { message: "Something went wrong", i18n: res });
         }
       }
     );

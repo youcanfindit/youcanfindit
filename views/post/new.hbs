@@ -1,5 +1,5 @@
 <div class="container newWrapper listWrapper">
-  <h2>New post</h2>
+  <h2>{{{i18n.__ "New post"}}}</h2>
 
   {{#unless noAnimals}}
   <form action="/post/new" method="POST" id="form-container">
@@ -11,9 +11,9 @@
       
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="animal">Choose your pet</label>
+          <label for="animal">{{{i18n.__ "Choose your pet"}}}</label>
           <select name="animal">
-            <option value="" selected>Pets</option>
+            <option value="" selected>{{{i18n.__ "Pet"}}}</option>
             {{#each animals}}
             <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
@@ -21,26 +21,26 @@
         </div>
 
         <div class="form-group col-md-4">
-          <label for="location">Reward</label>
+          <label for="location">{{{i18n.__ "Reward"}}}</label>
           <input type="text" id="reward" name="reward">
         </div>
 
         <div class="form-group col-md-4">
-          <label for="date">When did you lost it</label>
+          <label for="date">{{{i18n.__ "When did you lost it"}}}</label>
           <input id="date" type="date" name="date" />
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-9">
-          <label for="description">Description</label>
+          <label for="description">{{{i18n.__ "Description"}}}</label>
           <textarea name="description" class="form-control"></textarea>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-12">
-          <label for="location">Location</label>
+          <label for="location">{{{i18n.__ "Location"}}}</label>
           <input id="geocomplete" type="text" name="literal" placeholder="Type an address" />
           <input id="find" type="button" value="Buscar" />
         </div>
@@ -56,7 +56,7 @@
 
       <div class="form-row buttonWrapper">
         <div class="form-group col-md-12">
-          <button>Post</button>
+          <button>{{{i18n.__ "Post"}}}</button>
         </div>
       </div>
 
@@ -67,8 +67,8 @@
 
   <p>
     {{noAnimals}}
-    <p>You haven't got any pets yet, create a new pet to post</p>
-    <a href="/animal/new">New pet</a>
+    <p>{{{i18n.__ "You haven't got any pets yet, create a new pet to post"}}}</p>
+    <a href="/animal/new">{{{i18n.__ "New pet"}}}</a>
   </p>
 
   {{/if}}

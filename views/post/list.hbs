@@ -1,16 +1,16 @@
 <div class="container listWrapper">
-    <h2>Posts</h2>
+    <h2>{{{i18n.__ "Posts"}}}</h2>
     
     {{#each posts}}
     <div class="row">
         <div class="animalWrapper">
-            <p>Name: {{this.animalId.name}}</p>
-            <p>Owner: {{this.userId.username}}</p>
-            <p>Description: {{this.description}}</p>
-            <p>State: {{animalId.state}}</p>
-            <a href="/post/detail/{{this.id}}">Detail</a>
+            <p>{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</p>
+            <p>{{{../i18n.__ "Owner"}}}: {{this.userId.username}}</p>
+            <p>{{{../i18n.__ "Description"}}}: {{this.description}}</p>
+            <p>{{{../i18n.__ "State"}}}: {{animalId.state}}</p>
+            <a href="/post/detail/{{this.id}}">{{{../i18n.__ "Detail"}}}</a>
             {{#if_equal this.userId._id ../user._id}}
-            <a href="/private/posts/editPost/{{this.id}}">Edit</a>
+            <a href="/private/posts/editPost/{{this.id}}">{{{../i18n.__ "Edit"}}}</a>
             {{/if_equal}}
         </div>
         <div class="images">
