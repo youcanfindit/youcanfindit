@@ -40,7 +40,9 @@ footer {
   text-align: center; }
 
 .btn {
-  margin: 10px !important; }
+  margin: 10px !important;
+  background-color: #2A863E !important;
+  border-color: #2A863E !important; }
 
 #navPic {
   margin-top: 0px !important;
@@ -49,6 +51,9 @@ footer {
 .navCenter {
   display: flex;
   align-items: center; }
+
+a {
+  color: #212529 !important; }
 
 .circulo {
   border: 5px solid #002E0A;

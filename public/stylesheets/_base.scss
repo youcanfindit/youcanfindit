@@ -48,6 +48,8 @@ footer {
 
 .btn {
     margin: 10px !important;
+    background-color: #2A863E !important;
+    border-color: #2A863E !important;
 }
 
 #navPic{
@@ -58,4 +60,8 @@ footer {
 .navCenter {
   display: flex;
   align-items: center;
+}
+
+a{
+  color: #212529 !important;
 }
