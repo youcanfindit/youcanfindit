@@ -6,6 +6,8 @@ const multer = require("multer");
 // const upload = multer({ dest: "./public/uploads/users/" });
 const ensureLogin = require("connect-ensure-login");
 const uploadCloud = require("../config/cloudinary.js");
+const urlencode = require('urlencode')
+const nodemailer = require('nodemailer')
 
 
 // Bcrypt to encrypt passwords
@@ -46,13 +48,16 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
+    const hashConfirmation = bcrypt.hashSync(username, salt)
 
     const newUser = new User({
       username,
       password: hashPass,
       email,
       name,
-      profilePic: req.file.url
+      profilePic: req.file.url,
+      status: 'pending',
+      confirmationCode: hashConfirmation
     });
     console.log(newUser);
     newUser.save(err => {
@@ -60,6 +65,28 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
         res.redirect("/");
+
+        let urlConfirmation = urlencode(hashConfirmation)
+
+        let subject = 'SIGNUP DEL GUENO'
+        let message = `<a href="http://localhost:3000/auth/confirm/${urlConfirmation}">Validate account</a>`
+
+
+        let transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
+          }
+        });
+        transporter.sendMail({
+          from: process.env.GMAIL_USER,
+          to: process.env.GMAIL_USER,
+          subject: subject,
+          html: `<b>${message}</b>`
+        })
+        .then(console.log('mail sent'))
+        .catch(error => console.log(error));
       }
     });
   });
@@ -134,5 +161,16 @@ authRoutes.post(
     );
   }
 );
+
+
+authRoutes.get('/confirm/:id', (req, res, next) => {
+  User.findOneAndUpdate({confirmationCode: urlencode.decode(req.params.id)}, {status: 'confirmed'})
+  .then(() => {
+    res.render('auth/confirm', {status: 'ok'})
+  })
+  .catch(() => {
+    res.render('auth/confirm', {status: 'ko'})
+  })
+})
 
 module.exports = authRoutes;

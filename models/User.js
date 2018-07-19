@@ -8,7 +8,9 @@ const userSchema = new Schema(
     name: String,
     profilePic: String,
     email: { type: String, required: true, unique: true },
-    role: { type: String, default: "user", enum: ["admin", "user"]}
+    role: { type: String, default: "user", enum: ["admin", "user"]},
+    status: {type: String, default: 'pending', enum: ['confirmed', 'pending']},
+    confirmationCode: {type: String, unique: true}
   },
   {
     timestamps: {
