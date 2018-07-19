@@ -10,19 +10,19 @@
 
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="animal">Mascota</label>
+          <label for="animal">{{{i18n.__ "Pet"}}}</label>
           <select name="animal">
             <option value="{{post.animalId.name}}" selected>{{post.animalId.name}}</option>
           </select>
         </div>
 
         <div class="form-group col-md-4">
-          <label for="location">Recompensa</label>
+          <label for="reward">{{{i18n.__ "Reward"}}}</label>
           <input type="text" id="reward" name="reward" value="{{post.reward}}">
         </div>
 
         <div class="form-group col-md-4">
-          <label for="date">Fecha de desaparición</label>
+          <label for="date">{{{i18n.__ "When did you lose it"}}}</label>
           <input id="date" type="date" name="date" value="{{post.date}}" />
         </div>
       </div>
@@ -30,17 +30,17 @@
 
       <div class="form-row">
         <div class="form-group col-md-9">
-          <label for="description">Descripción</label>
+          <label for="description">{{{i18n.__ "Description"}}}</label>
           <textarea name="description" class="form-control">{{post.description}}</textarea>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-12">
-          <label for="location">Ubicación aproximada</label>
+          <label for="location">{{{i18n.__ "Location"}}}</label>
           <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" value="{{post.location.literal}}"
           />
-          <input id="find" type="button" value="Buscar" />
+          <input id="find" type="button" value="{{{i18n.__ "Search"}}}" class="btn btn-primary"/>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
           <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
           <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
         </div>
-        <button class="btn btn-primary">Edit post</button>
+        <button class="btn btn-primary">{{{i18n.__ "Edit post"}}}</button>
       </div>
     </div>
   </form>

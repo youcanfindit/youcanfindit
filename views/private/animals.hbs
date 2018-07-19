@@ -1,15 +1,15 @@
 {{#each animals}}
-<h2>Animals</h2>
-    <p>Name: {{this.name}}</p>
-    <p>Description: {{this.description}}</p>
-    <p>State: {{this.state}}</p>
+<h2>{{{../i18n.__ "Pet"}}}</h2>
+    <p>{{{../i18n.__ "Name"}}}: {{this.name}}</p>
+    <p>{{{../i18n.__ "Description"}}}: {{this.description}}</p>
+    <p>{{{../i18n.__ "State"}}}: {{this.state}}</p>
 
     <img src="/uploads/animals/{{profilePic}}" alt="{{this.name}}">
     
     <br>
     
-    <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">Edit</a>
+    <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
     
-    <a href="/animal/detail/{{this.id}}" class="btn btn-primary">Detail</a>
-    <a href="/private/animals/delete/{{this._id}}" class="btn btn-primary">Delete</a>
+    <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
+    <a href="/private/animals/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete"}}}</a>
 {{/each}}

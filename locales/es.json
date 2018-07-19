@@ -24,7 +24,7 @@
 	"New post": "Nuevo post",
 	"Choose your pet": "Elige tu mascota",
 	"Reward": "Recompensa",
-	"When did you lost it": "Cuándo se perdió",
+	"When did you lose it": "Cuándo se perdió",
 	"Location": "Ubicación",
 	"You haven't got any pets yet, create a new pet to post": "No has creado ninguna mascota, crea una para poder postear",
 	"Post": "Post",
@@ -56,5 +56,10 @@
 	"Sign up": "Regístrate",
 	"Profile": "Perfil",
 	"New Pet": "Nueva mascota",
-	"New Post": "Nuevo post"
+	"New Post": "Nuevo post",
+	"Delete": "Eliminar",
+	"Edit pet": "Editar mascota",
+	"Found": "Encontrado",
+	"Edit post": "Editar post",
+	"Search": "Buscar"
 }

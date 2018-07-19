@@ -24,7 +24,7 @@
 	"New post": "New post",
 	"Choose your pet": "Choose your pet",
 	"Reward": "Reward",
-	"When did you lost it": "When did you lost it",
+	"When did you lose it": "When did you lose it",
 	"Location": "Location",
 	"You haven't got any pets yet, create a new pet to post": "You haven't got any pets yet, create a new pet to post",
 	"Post": "Post",
@@ -57,5 +57,9 @@
 	"New Pet": "New Pet",
 	"New Post": "New Post",
 	"Sign up": "Sign up",
-	"Edit post": "Edit post"
+	"Edit post": "Edit post",
+	"Delete": "Delete",
+	"Edit pet": "Edit pet",
+	"Found": "Found",
+	"Search": "Search"
 }
