@@ -62,4 +62,13 @@ input {
 .error-message {
   color: red; }
 
+.columns {
+  display: flex;
+  justify-content: space-around;
+  max-width: 100% !important;
+  text-align: center !important; }
+
+.map {
+  margin: 20px; }
+
 /*# sourceMappingURL=style.css.map */

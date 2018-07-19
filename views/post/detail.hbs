@@ -1,26 +1,58 @@
-<p>{{{i18n.__ "Owner"}}}: {{post.userId.username}}</p>
-<p>{{{i18n.__ "Name"}}}: {{post.animalId.name}}</p>
+<div class="container listWrapper">
+  <div class="row">
 
-<p>{{{i18n.__ "Description"}}}: {{post.description}}</p>
-<p>{{{i18n.__ "State"}}}: {{post.animal.state}}</p>
-<p>{{{i18n.__ "Date"}}}: {{post.date}}</p>
-<div style="height: 200px; width: 400px" id="post-location" class="detail">
-  <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
-  <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12 columns">
+          <p>{{{i18n.__ "Owner"}}}: {{post.userId.username}}</p>
+          <p>{{{i18n.__ "Reward"}}}: {{post.reward}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 columns">
+          <p>{{{i18n.__ "Name"}}}: {{post.animalId.name}}</p>
+          <p>{{{i18n.__ "State"}}}: {{post.animalId.state}}</p>
+          <p>{{{i18n.__ "Date"}}}: {{post.date}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 columns">
+          <p>{{{i18n.__ "Description"}}}: {{post.description}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 columns">
+          <img src="{{post.animalId.profilePic}}" alt="{{post.animalId.name}}">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <div class="map">
+        <div id="post-location" class="detail">
+          <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
+          <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
+    {{#each comments}}
+    <p>{{this.userId.username}}</p>
+    <p>{{this.comment}}</p>
+    <a href="/comment/delete/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Delete comment"}}}</a>
+    <a href="/comment/edit/{{this._id}}" class="btn btn-primary">{{{../i18n.__ "Edit comment"}}}</a>
+    {{/each}}
+  </div>
+
+  <div class="col-md-12">
+    <a href="/comment/new/{{post._id}}" class="btn btn-primary">{{{i18n.__ "New comment"}}}</a>
+  </div>
+
 </div>
-<p>{{post.reward}}</p>
-
-{{#each comments}}
-<p>
-  {{this.userId.username}}
-</p>
-<p>
-  {{this.comment}}
-</p>
-<a href="/comment/delete/{{this._id}}">{{{../i18n.__ "Delete comment"}}}</a>
-<a href="/comment/edit/{{this._id}}">{{{../i18n.__ "Edit comment"}}}</a>
-
-
-{{/each}}
-
-<a href="/comment/new/{{post._id}}">{{{i18n.__ "New comment"}}}</a>

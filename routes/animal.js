@@ -11,7 +11,6 @@ router.get("/", (req, res, next) => {
   let species = req.query.species
   let status = req.query.status
   let sortBy = req.query.sortBy
-
   let sortQuery = {}
   if (sortBy != undefined && sortBy != '') {
     if (sortBy.toLowerCase() == 'asc' || sortBy.toLowerCase() == 'desc') {
