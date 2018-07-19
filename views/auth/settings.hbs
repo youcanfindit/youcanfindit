@@ -1,16 +1,16 @@
-<h2>Change your details</h2>
+<h2>{{{i18n.__ "Change your details"}}}</h2>
 
 <form action="/auth/settings" method="POST" id="form-container" enctype="multipart/form-data">
-  <label for="email">Email address</label>  
-  <input id="email" type="text" name="email" placeholder="Email address">
+  <label for="email">{{{i18n.__ "Email address"}}}</label>  
+  <input id="email" type="text" name="email" placeholder="{{{i18n.__ "Email address"}}}">
 
-  <label for="password">Old password</label>
-  <input id="oldPassword" type="password" name="oldPassword" placeholder="Type the old password">
+  <label for="password">{{{i18n.__ "Old password"}}}</label>
+  <input id="oldPassword" type="password" name="oldPassword" placeholder="{{{i18n.__ "Type the old password"}}}">
 
-  <label for="password">New password</label>
-  <input id="newPassword" type="password" name="newPassword" placeholder="Type the new password">
+  <label for="password">{{{i18n.__ "New password"}}}</label>
+  <input id="newPassword" type="password" name="newPassword" placeholder="{{{i18n.__ "Type the new password"}}}">
 
-  <label for="profilePic">Profile picture</label>  
+  <label for="profilePic">{{{i18n.__ "Profile picture"}}}</label>  
   <input type="file" class="form-control-file" id="profilePic" name="profilePic">
 
 
@@ -18,6 +18,6 @@
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <button>Change details</button>
+  <button>{{{i18n.__ "Change details"}}}</button>
 
 </form>

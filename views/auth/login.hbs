@@ -2,11 +2,11 @@
 
 <form action="/auth/login" method="POST" id="form-container">
   <label for="username">{{{i18n.__ "Username"}}}</label>
-  <input id="username" type="text" name="username" placeholder="User name">
+  <input id="username" type="text" name="username" placeholder="{{{i18n.__ "User name"}}}">
 
 
   <label for="password">{{{i18n.__ "Password"}}}</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <input id="password" type="password" name="password" placeholder="{{{i18n.__ "Your password"}}}">
 
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -19,3 +19,4 @@
     <a href="/auth/signup">{{{i18n.__ "Signup"}}}</a>
   </p>
 </form>
+

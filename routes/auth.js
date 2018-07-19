@@ -59,7 +59,7 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
       if (err) {
         res.render("auth/signup", { message: "Something went wrong", i18n: res });
       } else {
-        res.redirect("/", { i18n: res });
+        res.redirect("/");
       }
     });
   });
@@ -67,7 +67,7 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/", { i18n: res });
+  res.redirect("/");
 });
 
 authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
@@ -107,7 +107,7 @@ authRoutes.post(
             { new: true }
           ).then(() => {
             if (res) {
-              res.redirect("/auth/profile", { i18n: res });
+              res.redirect("/auth/profile");
             } else {
               res.render("auth/settings", { message: "Something went wrong", i18n: res });
             }
@@ -126,7 +126,7 @@ authRoutes.post(
     User.findByIdAndUpdate(req.user.id, { $set: update }, { new: true }).then(
       () => {
         if (res) {
-          res.redirect("/auth/profile", { i18n: res });
+          res.redirect("/auth/profile");
         } else {
           res.render("auth/settings", { message: "Something went wrong", i18n: res });
         }
