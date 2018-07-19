@@ -1,19 +1,19 @@
-<h2>Signup</h2>
+<h2>{{{i18n.__ "Signup"}}}</h2>
 
 <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="User name">
+  <label for="username">{{{i18n.__ "Username"}}}</label>
+  <input id="username" type="text" name="username" placeholder="{{{i18n.__ "User name"}}}">
 
-  <label for="email">Email address</label>  
-  <input id="email" type="text" name="email" placeholder="Email address">
+  <label for="email">{{{i18n.__ "Email address"}}}</label>  
+  <input id="email" type="text" name="email" placeholder="{{{i18n.__ "Email address"}}}">
 
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <label for="password">{{{i18n.__ "Password"}}}</label>
+  <input id="password" type="password" name="password" placeholder="{{{i18n.__ "Your password"}}}">
 
-  <label for="name">Name</label>  
-  <input id="name" type="text" name="name" placeholder="Name">
+  <label for="name">{{{i18n.__ "Name"}}}</label>  
+  <input id="name" type="text" name="name" placeholder="{{{i18n.__ "Name"}}}">
 
-  <label for="profilePic">Profile picture</label>  
+  <label for="profilePic">{{{i18n.__ "Profile picture"}}}</label>  
   <input type="file" class="form-control-file" id="profilePic" name="profilePic">
 
 
@@ -21,10 +21,11 @@
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <button>Create account</button>
+  <button>{{{i18n.__ "Create account"}}}</button>
 
   <p class="account-message">
-    Do you already have an account?
-    <a href="/auth/login">Login</a>
+    {{{i18n.__ "Do you already have an account?"}}}
+    <a href="/auth/login">{{{i18n.__ "Login"}}}</a>
   </p>
 </form>
+

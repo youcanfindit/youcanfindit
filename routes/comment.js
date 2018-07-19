@@ -10,7 +10,7 @@ router.get("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const postId = req.params.id;
   Post.findById(postId)
     .then(post => {
-      res.render("comment/new", { post: post });
+      res.render("comment/new", { post: post, i18n: res });
     })
     .catch();
 });
@@ -74,7 +74,7 @@ router.post("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
 
 router.get("/edit/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   Comment.findById(req.params.id).then(post => {
-    res.render(`comment/edit`, { post });
+    res.render(`comment/edit`, { post, i18n: res  });
   });
 });
 
