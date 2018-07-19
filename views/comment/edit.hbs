@@ -1,11 +1,13 @@
-<h2>{{{i18n.__ "Edit comment"}}}</h2>
-<form action="/comment/edit/{{post._id}}" method="POST" id="form-container">
-  <label for="comment">{{{i18n.__ "Comment"}}}</label>
-  <textarea id="comment" name="comment" class="form-control" required>{{post.comment}}</textarea>
+<div class="container newWrapper listWrapper">
 
-  {{#if message}}
+  <h2>{{{i18n.__ "Edit comment"}}}</h2>
+  <form action="/comment/edit/{{post._id}}" method="POST" id="form-container">
+    <label for="comment">{{{i18n.__ "Comment"}}}</label>
+    <textarea id="comment" name="comment" class="form-control" required>{{post.comment}}</textarea> {{#if message}}
     <div class="error-message">{{ message }}</div>
-  {{/if}}
+    {{/if}}
 
-  <button>{{{i18n.__ "Edit comment"}}}</button>
-</form>
+    <button class="btn btn-primary">{{{i18n.__ "Edit comment"}}}</button>
+  </form>
+
+</div>

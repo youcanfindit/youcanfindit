@@ -119,10 +119,6 @@ authRoutes.post(
     const salt = bcrypt.genSaltSync(bcryptSalt);
     let update = {};
 
-    if (req.body.email != "") {
-      update.email = req.body.email;
-    }
-
     if (req.body.oldPassword != "") {
       User.findById(req.user.id).then(user => {
         console.log(req.user.id);
@@ -152,7 +148,7 @@ authRoutes.post(
     }
 
     if (req.file) {
-      update.profilePic = req.file.filename;
+      update.profilePic = req.file.url;
     }
 
     console.log(update);

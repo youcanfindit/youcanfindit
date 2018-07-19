@@ -65,5 +65,8 @@
 	" Type the old password ": " Contraseña antigua ",
 	" Type the new password ": " Nueva contraseña ",
 	" Dog ": " Dog ",
-	" Cat ": " Cat "
+	" Cat ": " Cat ",
+	" User name ": " User name ",
+	" Your password ": " Your password ",
+	"Confirmation Status": "Confirmación de email"
 }

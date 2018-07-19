@@ -9,7 +9,7 @@
         <div class="card-body">
           <h5 class="card-title">{{{../i18n.__ "Name"}}}: {{this.animalId.name}}</h5>
           <h5 class="card-title">{{{../i18n.__ "State"}}}: {{animalId.state}}</h5>
-          <p class="card-text">{{this.description}}</p>
+          <h5 class="card-text">{{this.description}}</h5>
           <a href="/post/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
           {{#if_equal this.userId._id ../user._id}}
           <a href="/private/posts/editPost/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>

@@ -1,15 +1,18 @@
-<h2>{{{i18n.__ "New comment"}}}</h2>
-<form action="/comment/new/{{post._id}}" method="POST" id="form-container">
-  <label for="comment">{{{i18n.__ "Comment"}}}</label>
-  <textarea id="comment" name="comment" class="form-control"></textarea>
+<div class="container newWrapper listWrapper">
 
-  <br>
-  {{#if message}}
+  <h2>{{{i18n.__ "New comment"}}}</h2>
+  <form action="/comment/new/{{post._id}}" method="POST" id="form-container">
+    <label for="comment">{{{i18n.__ "Comment"}}}</label>
+    <textarea id="comment" name="comment" class="form-control"></textarea>
+
+    <br> {{#if message}}
     <div class="error-message">{{ message }}</div>
-  {{/if}}
+    {{/if}}
 
-  <br><br>
+    <br>
+    <br>
 
-  <button>{{{i18n.__ "New comment"}}}</button>
-</form>
+    <button class="btn btn-primary">{{{i18n.__ "New comment"}}}</button>
+  </form>
 
+</div>
