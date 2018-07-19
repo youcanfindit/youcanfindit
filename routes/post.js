@@ -41,7 +41,7 @@ router.get("/", (req, res, next) => {
           })
         }
       }
-    res.render('post/list', { posts, user: req.user, i18n: res })
+    res.render('post/list', { posts, user: req.user, i18n: res, active: 'posts' })
   })
 })
 
@@ -77,7 +77,7 @@ router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
       return
     }
 
-    res.render('post/new', {animals, i18n: res })
+    res.render('post/new', {animals, i18n: res, active: 'newpost' })
   })
 })
 

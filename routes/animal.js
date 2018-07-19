@@ -39,7 +39,7 @@ router.get("/", (req, res, next) => {
           })
         }
       }
-      res.render("animals/list", { animals, i18n: res });
+      res.render("animals/list", { animals, i18n: res, active: 'animals' });
     });
 });
 
@@ -59,7 +59,7 @@ router.get("/detail/:id", (req, res, next) => {
 });
 
 router.get("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("animals/new", { i18n: res });
+  res.render("animals/new", { i18n: res, active: 'newanimal' });
 });
 
 
