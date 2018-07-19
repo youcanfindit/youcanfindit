@@ -1,5 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 body {
-  font-family: 'Times New Roman', Times, serif !important; }
+  font-family: "Open Sans", sans-serif; }
+
+nav {
+  height: 80px; }
 
 .pictureSection {
   background: url(../images/background.jpeg) no-repeat;
@@ -14,8 +18,11 @@ body {
   padding: 35px; }
 
 footer {
-  margin: 0;
-  height: 60px;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100vw;
+  padding: 12px;
   background-color: #f8f9fa !important; }
 
 .btn {
@@ -23,10 +30,19 @@ footer {
 
 .listWrapper {
   margin: 50px auto !important;
-  background-color: #dcebee !important;
-  border-radius: 20px;
-  padding: 50px 100px !important;
-  max-width: 1500px !important; }
+  padding: 50px 100px 80px 100px !important;
+  max-width: 1500px !important;
+  background-color: #F8F8F8;
+  color: #464D61;
+  box-shadow: 0 10px 15px #CCC;
+  border-radius: 5px; }
+  .listWrapper .cardWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; }
+    .listWrapper .cardWrapper .card {
+      margin: 30px 0; }
 
 .row {
   justify-content: space-evenly; }
@@ -38,10 +54,15 @@ footer {
   align-items: center;
   height: 250px; }
 
+.card-img-top {
+  max-width: 100%;
+  max-height: 250px; }
+
 .images {
   width: 250px; }
   .images img {
     max-width: 100%;
+    max-height: 250px;
     height: 200px; }
 
 .row {

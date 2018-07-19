@@ -116,7 +116,7 @@ hbs.registerHelper('__n', function () {
 
 // default value for title local
 app.use((req, res, next) => {
-  app.locals.title = "You can find it";
+  app.locals.title = "Finderpet";
   app.locals.user = req.user;
   console.log(req.user ? req.user.username : 'no user')
   next();
