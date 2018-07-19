@@ -91,7 +91,7 @@ router.post("/new", [uploadCloud.single("profilePic"), ensureLoggedIn("/auth/log
     newAnimal.save(err => {
       if (err) {
         res.render("animal/new", {
-          message: "Something went wrong. Try again later."
+          message: "Something went wrong. Try again later.", i18n: res
         });
         console.log(err);
         return;

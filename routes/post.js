@@ -97,7 +97,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
 
     if (foundPost !== null) {
       res.render("post/new", {
-        message: "Ya existe un anuncio con esta mascota"
+        message: "Ya existe un anuncio con esta mascota", i18n: res
       });
       return;
     }
@@ -118,7 +118,7 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
     newPost.save(err => {
       if (err) {
         res.render("post/new", {
-          message: "Something went wrong. Try again later."
+          message: "Something went wrong. Try again later.", i18n: res
         });
         console.log(err);
         return;
