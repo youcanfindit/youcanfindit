@@ -46,7 +46,7 @@ locales:['en', 'es'],
 directory: __dirname + '/locales',
 //define the default language
 defaultLocale: 'en',
-// define a custom cookie name to parse locale settings from 
+// define a custom cookie name to parse locale settings from
 cookie: 'i18n'
 });
 
@@ -59,7 +59,6 @@ app.use(
     secret: "i18n_demo",
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
@@ -119,6 +118,7 @@ hbs.registerHelper('__n', function () {
 app.use((req, res, next) => {
   app.locals.title = "You can find it";
   app.locals.user = req.user;
+  console.log(req.user ? req.user.username : 'no user')
   next();
 });
 

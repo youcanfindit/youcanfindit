@@ -4,8 +4,9 @@ const Comment = require("../models/Comment");
 const Post = require("../models/Post");
 const { ensureLoggedIn } = require("connect-ensure-login");
 const roles = require("../utils/roles");
+const { sendMail } = require('../mail/sendMail');
 
-router.get("/new/:id", ensureLoggedIn("auth/login"), (req, res, next) => {
+router.get("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const postId = req.params.id;
   Post.findById(postId)
     .then(post => {
@@ -14,7 +15,7 @@ router.get("/new/:id", ensureLoggedIn("auth/login"), (req, res, next) => {
     .catch();
 });
 
-router.post("/new/:id", ensureLoggedIn("auth/login"), (req, res, next) => {
+router.post("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const userId = req.user._id;
   const postId = req.params.id;
 
@@ -29,18 +30,47 @@ router.post("/new/:id", ensureLoggedIn("auth/login"), (req, res, next) => {
 
   let newComment = new Comment(commentInfo);
 
-  newComment.save(err => {
+  newComment.save((err) => {
     if (err) {
       res.render("comment/new", {
         message: "Something went wrong. Try again later."
       });
       console.log(err);
       return;
-    }
+    } else {
+      Post.findById(req.params.id)
+      .populate('userId')
+      .exec((err, post) => {
+        let subject = 'You have recived a new comment on Finderpet'
+        if (res.locale === 'es') {
+          subject = 'Has recibido un nuevo comentario en Finderpet'
+        }
 
-    res.redirect(`/post/detail/${req.params.id}`);
-  });
-});
+        let welcome = 'You have a new comment'
+        if (res.locale === 'es') {
+          welcome = 'Tienes un nuevo comentario'
+        }
+
+        let claim = 'Read it using the button below.'
+        if (res.locale === 'es') {
+          claim = 'Leelo pulsando el boton de abajo'
+        }
+
+        let confirmationString = 'Read comment'
+        if (res.locale === 'es') {
+          confirmationString = 'Leer comentario'
+        }
+
+        sendMail(post.userId.email, subject, {confirmationUrl: `${process.env.URL}post/detail/${req.params.id}`, welcome, claim, confirmationString}, 'comment').then( () => {
+          console.log('mail de comentario enviado')
+        })
+        .catch(err => console.log('mail de comentario no enviado: ' + err))
+      })
+
+      res.redirect(`/post/detail/${req.params.id}`);
+    }
+  })
+})
 
 router.get("/edit/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   Comment.findById(req.params.id).then(post => {

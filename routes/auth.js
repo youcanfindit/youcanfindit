@@ -7,7 +7,7 @@ const multer = require("multer");
 const ensureLogin = require("connect-ensure-login");
 const uploadCloud = require("../config/cloudinary.js");
 const urlencode = require('urlencode')
-const nodemailer = require('nodemailer')
+const { sendMail } = require('../mail/sendMail');
 
 
 // Bcrypt to encrypt passwords
@@ -63,30 +63,36 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
     newUser.save(err => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong", i18n: res });
+        return
       } else {
-        res.redirect("/");
-
         let urlConfirmation = urlencode(hashConfirmation)
 
-        let subject = 'SIGNUP DEL GUENO'
-        let message = `<a href="http://localhost:3000/auth/confirm/${urlConfirmation}">Validate account</a>`
+        let subject = 'Confirm your registration at Finderpet'
+        if (res.locale === 'es') {
+          subject = 'Confirma tu registro en Finderpet'
+        }
 
+        let welcome = 'Welcome to Finderpet'
+        if (res.locale === 'es') {
+          welcome = 'Bienvenido a Finderpet'
+        }
 
-        let transporter = nodemailer.createTransport({
-          service: 'Gmail',
-          auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS
-          }
-        });
-        transporter.sendMail({
-          from: process.env.GMAIL_USER,
-          to: process.env.GMAIL_USER,
-          subject: subject,
-          html: `<b>${message}</b>`
+        let claim = 'Please, use the button below to confirm your registration.'
+        if (res.locale === 'es') {
+          claim = 'Por favor, usa el boton de abajo para confirmar tu registro.'
+        }
+
+        let confirmationString = 'Validate your account'
+        if (res.locale === 'es') {
+          confirmationString = 'Valida tu cuenta'
+        }
+
+        sendMail(email, subject, {confirmationUrl: `${process.env.URL}auth/confirm/${urlConfirmation}`, welcome, claim, confirmationString}, 'confirmation').then( () => {
+          console.log('mail enviado')
         })
-        .then(console.log('mail sent'))
-        .catch(error => console.log(error));
+        .catch(err => console.log('mail no enviado: ' + err))
+
+        res.redirect("/");
       }
     });
   });
@@ -94,7 +100,7 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/", { i18n: res });
+  res.redirect("/");
 });
 
 authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
@@ -134,7 +140,7 @@ authRoutes.post(
             { new: true }
           ).then(() => {
             if (res) {
-              res.redirect("/auth/profile", { i18n: res });
+              res.redirect("/auth/profile");
             } else {
               res.render("auth/settings", { message: "Something went wrong", i18n: res });
             }
@@ -153,7 +159,7 @@ authRoutes.post(
     User.findByIdAndUpdate(req.user.id, { $set: update }, { new: true }).then(
       () => {
         if (res) {
-          res.redirect("/auth/profile", { i18n: res });
+          res.redirect("/auth/profile");
         } else {
           res.render("auth/settings", { message: "Something went wrong", i18n: res });
         }

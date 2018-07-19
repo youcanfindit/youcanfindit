@@ -19,7 +19,6 @@ router.get("/", (req, res, next) => {
     }
   }
 
-  //ORDENAR POR FECHA DE CREACION
   Post.find()
     .populate("userId", "username")
     .populate("animalId")
@@ -42,7 +41,6 @@ router.get("/", (req, res, next) => {
           })
         }
       }
-    res.cookie("locale", req.params.locale)
     res.render('post/list', { posts, user: req.user, i18n: res })
   })
 })
@@ -62,7 +60,6 @@ router.get('/detail/:id', (req, res, next) => {
     .populate('userId', 'username')
     .sort({updatedAt: -1})
     .exec((err, comments) => {
-      res.cookie("locale", req.params.locale)
       res.render('post/detail', { post, comments, i18n: res })
     })
   })
@@ -77,11 +74,10 @@ router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
     }
 
     if (animals.length == 0) {
-      res.render('post/new', {noAnimals: 'No tienes mascotas, crea una nueva'})
+      res.render('post/new', {noAnimals: 'No tienes mascotas, crea una nueva', i18n: res })
       return
     }
 
-    res.cookie("locale", req.params.locale)
     res.render('post/new', {animals, i18n: res })
   })
 })
