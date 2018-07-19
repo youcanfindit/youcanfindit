@@ -15,7 +15,7 @@
 	"Species": "Especie",
 	"Upload a picture": "Selecciona una foto",
 	"Dog": "Perro",
-	"Cat": "Cat",
+	"Cat": "Gato",
 	"Posts": "Posts",
 	"Date": "Date",
 	"Delete comment": "Borrar comentario",
@@ -64,9 +64,12 @@
 	"Search": "Buscar",
 	" Type the old password ": " Contraseña antigua ",
 	" Type the new password ": " Nueva contraseña ",
-	" Dog ": " Dog ",
-	" Cat ": " Cat ",
 	" User name ": " User name ",
 	" Your password ": " Your password ",
-	"Confirmation Status": "Confirmación de email"
+	"Confirmation Status": "Confirmación de email",
+	" Dog ": " Perro ",
+	" Cat ": " Gato ",
+	"Filter": "Filtrar",
+	"Open": "Open",
+	"Closed": "Closed"
 }

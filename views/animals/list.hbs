@@ -1,5 +1,27 @@
 <div class="container listWrapper">
-    <h2>{{{i18n.__ "Pet"}}}</h2>
+
+  <div class="row">
+    <div class="col-7">
+      <h2>{{{i18n.__ "Pet"}}}</h2>
+    </div>
+    <div class="col-1">
+      {{{i18n.__ "Filter"}}}
+    </div>
+    <div class="col-1">
+      <a href="/animal?species=dog">{{{i18n.__ "Dog"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/animal?species=cat">{{{i18n.__ "Cat"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/animal?status=lost">{{{i18n.__ "Lost"}}}</a>
+    </div>
+    <div class="col-1">
+      <a href="/animal?status=found">{{{i18n.__ "Found"}}}</a>
+    </div>
+  </div>
+
+
 
     <div class="cardWrapper">
 

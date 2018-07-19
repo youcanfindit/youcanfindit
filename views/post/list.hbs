@@ -1,5 +1,26 @@
 <div class="container listWrapper">
-    <h2>{{{i18n.__ "Posts"}}}</h2>
+
+
+    <div class="row">
+      <div class="col-7">
+        <h2>{{{i18n.__ "Posts"}}}</h2>
+      </div>
+      <div class="col-1">
+        {{{i18n.__ "Filter"}}}
+      </div>
+      <div class="col-1">
+        <a href="/post?species=dog">{{{i18n.__ "Dog"}}}</a>
+      </div>
+      <div class="col-1">
+        <a href="/post?species=cat">{{{i18n.__ "Cat"}}}</a>
+      </div>
+      <div class="col-1">
+        <a href="/post?status=open">{{{i18n.__ "Open"}}}</a>
+      </div>
+      <div class="col-1">
+        <a href="/post?status=closed">{{{i18n.__ "Closed"}}}</a>
+      </div>
+    </div>
 
     <div class="cardWrapper">
       {{#each posts}}
