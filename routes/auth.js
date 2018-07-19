@@ -108,7 +108,7 @@ authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("auth/settings", { user: req.user, i18n: res, active: 'profile' });
+  res.render("auth/settings", { user: req.user, i18n: res });
 });
 
 authRoutes.post(

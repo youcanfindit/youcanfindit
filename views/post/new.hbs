@@ -8,11 +8,11 @@
       {{#if message }}
       <div class="error-message">{{ message }}</div>
       {{/if}}
-      
+
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="animal">{{{i18n.__ "Choose your pet"}}}</label>
-          <select name="animal" class="btn btn-primary">
+          <select name="animal" class="btn btn-primary" required>
             <option value="" selected>{{{i18n.__ "Pet"}}}</option>
             {{#each animals}}
             <option value="{{this._id}}">{{this.name}}</option>
@@ -22,19 +22,19 @@
 
         <div class="form-group col-md-4">
           <label for="reward">{{{i18n.__ "Reward"}}}</label>
-          <input type="text" id="reward" name="reward">
+          <input type="text" id="reward" name="reward" required>
         </div>
 
         <div class="form-group col-md-4">
           <label for="date">{{{i18n.__ "When did you lose it"}}}</label>
-          <input id="date" type="date" name="date" />
+          <input id="date" type="date" name="date" required/>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-9">
           <label for="description">{{{i18n.__ "Description"}}}</label>
-          <textarea name="description" class="form-control"></textarea>
+          <textarea name="description" class="form-control" required></textarea>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
 
   </form>
 
-  {{/unless}} 
+  {{/unless}}
   {{#if noAnimals}}
 
   <p>

@@ -4,6 +4,9 @@ body {
 
 nav {
   height: 80px; }
+  nav img {
+    margin-top: 25px;
+    background-color: #2DA547; }
 
 .pictureSection {
   background: url(../images/background.jpeg) no-repeat;
@@ -29,8 +32,8 @@ footer {
   margin: 10px !important; }
 
 .listWrapper {
-  margin: 50px auto !important;
-  padding: 50px 100px 80px 100px !important;
+  margin: 50px auto 80px auto !important;
+  padding: 50px 100px !important;
   max-width: 1500px !important;
   background-color: #F8F8F8;
   color: #464D61;
