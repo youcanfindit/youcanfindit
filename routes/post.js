@@ -62,10 +62,10 @@ router.get('/detail/:id', (req, res, next) => {
     .populate('userId', 'username')
     .sort({updatedAt: -1})
     .exec((err, comments) => {
-      res.render('post/detail', {post, comments})
+      res.cookie("locale", req.params.locale)
+      res.render('post/detail', { post, comments, i18n: res })
     })
   })
-
 });
 
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
@@ -81,7 +81,8 @@ router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
       return
     }
 
-    res.render('post/new', {animals})
+    res.cookie("locale", req.params.locale)
+    res.render('post/new', {animals, i18n: res })
   })
 })
 

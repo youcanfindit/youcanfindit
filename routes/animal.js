@@ -61,13 +61,13 @@ router.get("/detail/:id", (req, res, next) => {
       }
 
       console.log(animal);
-      res.cookie("locale", req.params.locale)
       res.render("animals/detail", { animal, i18n: res });
     });
 });
 
 router.get("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  res.render("animals/new");
+  res.cookie("locale", req.params.locale)
+  res.render("animals/new", { i18n: res });
 });
 
 
