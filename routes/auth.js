@@ -15,7 +15,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 authRoutes.get("/login", (req, res, next) => {
-  res.render("auth/login", { message: req.flash("error"), i18n: res });
+  res.render("auth/login", { message: req.flash("error"), i18n: res, active: 'login' });
 });
 
 authRoutes.post(
@@ -29,7 +29,7 @@ authRoutes.post(
 );
 
 authRoutes.get("/signup", (req, res, next) => {
-  res.render("auth/signup", { i18n: res });
+  res.render("auth/signup", { i18n: res, active: 'signup' });
 });
 
 authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) => {
@@ -104,11 +104,11 @@ authRoutes.get("/logout", (req, res) => {
 });
 
 authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("auth/profile", { user: req.user, i18n: res });
+  res.render("auth/profile", { user: req.user, i18n: res, active: 'profile' });
 });
 
 authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("auth/settings", { user: req.user, i18n: res });
+  res.render("auth/settings", { user: req.user, i18n: res, active: 'profile' });
 });
 
 authRoutes.post(
@@ -172,10 +172,10 @@ authRoutes.post(
 authRoutes.get('/confirm/:id', (req, res, next) => {
   User.findOneAndUpdate({confirmationCode: urlencode.decode(req.params.id)}, {status: 'confirmed'})
   .then(() => {
-    res.render('auth/confirm', {status: 'ok'})
+    res.render('auth/confirm', {i18n: res, status: 'ok'})
   })
   .catch(() => {
-    res.render('auth/confirm', {status: 'ko'})
+    res.render('auth/confirm', {i18n: res, status: 'ko'})
   })
 })
 

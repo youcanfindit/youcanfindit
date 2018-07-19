@@ -8,41 +8,103 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">{{{i18n.__ "You can find it"}}}</a>
+    <a class="navbar-brand" href="/">Finderpet</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/animal">{{{i18n.__ "Pets"}}}
+        {{#if_equal active 'animals'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "Pets"}}}
             <span class="sr-only">(current)</span>
           </a>
         </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/animal">{{{i18n.__ "Pets"}}}</a>
+        </li>
+        {{/if_equal}}
+
+        {{#if_equal active 'posts'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "Posts"}}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/post">{{{i18n.__ "Posts"}}}</a>
         </li>
-        {{#if user }}
+        {{/if_equal}}
+
+        {{#if user}}
+        {{#if_equal active 'profile'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "Profile"}}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/auth/profile">{{{i18n.__ "Profile"}}}</a>
         </li>
+        {{/if_equal}}
+
+        {{#if_equal active 'newanimal'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "New Pet"}}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/animal/new">{{{i18n.__ "New Pet"}}}</a>
         </li>
+        {{/if_equal}}
+
+        {{#if_equal active 'newpost'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="/post/new">{{{i18n.__ "New Post"}}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/post/new">{{{i18n.__ "New Post"}}}</a>
         </li>
+        {{/if_equal}}
+
         <li class="nav-item">
           <a class="nav-link" href="/auth/logout">{{{i18n.__ "Log out"}}}</a>
+        </li>
+
+        {{else}}
+
+        {{#if_equal active 'login'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "Log in"}}}
+            <span class="sr-only">(current)</span>
+          </a>
         </li>
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/auth/login">{{{i18n.__ "Log in"}}}</a>
         </li>
+        {{/if_equal}}
+
+        {{#if_equal active 'signup'}}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{{i18n.__ "Sign up"}}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/auth/signup">{{{i18n.__ "Sign up"}}}</a>
         </li>
+        {{/if_equal}}
         {{/if}}
       </ul>
     </div>

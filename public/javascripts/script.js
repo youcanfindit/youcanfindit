@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
           $("#find").click()
 
         }, function() {});
+      } else {
+        $('input[name=literal]').val(`40.3919268,-3.6993235`)
+        $("#find").click()
       }
     }
 
