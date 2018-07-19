@@ -9,9 +9,10 @@ nav {
     background-color: #2DA547; }
 
 .pictureSection {
-  background: url(../images/background.jpeg) no-repeat;
+  background: url(../images/home-bg.jpg) no-repeat;
   background-size: cover;
-  height: 400px;
+  background-position: center;
+  height: 500px;
   margin: 0; }
 
 .bulletsSectionWrapper {
@@ -43,7 +44,7 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between; }
+    justify-content: space-around; }
     .listWrapper .cardWrapper .card {
       margin: 30px 0; }
 
