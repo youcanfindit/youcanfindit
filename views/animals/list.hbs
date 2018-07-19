@@ -13,7 +13,7 @@
           <p class="card-text">{{{../i18n.__ "Description"}}}: {{this.description}}</p>
           <a href="/animal/detail/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Detail"}}}</a>
           {{#if_equal this.userId._id ../user._id}}
-          <a href="/private/posts/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
+          <a href="/private/animals/editAnimal/{{this.id}}" class="btn btn-primary">{{{../i18n.__ "Edit"}}}</a>
           {{/if_equal}}
         </div>
       </div>
