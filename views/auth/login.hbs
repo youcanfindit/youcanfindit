@@ -1,22 +1,42 @@
-<h2>{{{i18n.__ "Login"}}}</h2>
+<div class="container newWrapper listWrapper">
+  <h2>{{{i18n.__ "Login"}}}</h2>
 
-<form action="/auth/login" method="POST" id="form-container">
-  <label for="username">{{{i18n.__ "Username"}}}</label>
-  <input id="username" type="text" name="username" placeholder="{{{i18n.__ "User name"}}}">
+  <div class="formWrapper">
 
+    <form action="/auth/login" method="POST" id="form-container">
 
-  <label for="password">{{{i18n.__ "Password"}}}</label>
-  <input id="password" type="password" name="password" placeholder="{{{i18n.__ "Your password"}}}">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="username">{{{i18n.__ "Username"}}}</label>
+          <input id="username" type="text" name="username" placeholder="{{{i18n.__ " User name "}}}">
+        </div>
 
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
+        <div class="form-group col-md-6">
+          <label for="password">{{{i18n.__ "Password"}}}</label>
+          <input id="password" type="password" name="password" placeholder="{{{i18n.__ " Your password "}}}">
+        </div>
+      </div>
 
-  <button class="btn btn-primary">{{{i18n.__ "Log in"}}}</button>
+      {{#if message }}
+      <div class="error-message">{{ message }}</div>
+      {{/if}}
+      
+      <div class="form-row buttonWrapper">
+        <div class="form-group col-md-12">
+          <button class="btn btn-primary">{{{i18n.__ "Log in"}}}</button>
+        </div>
+      </div>
 
-  <p class="account-message">
-    {{{i18n.__ "Don't have an account yet?"}}}
-    <a href="/auth/signup" class="btn btn-primary">{{{i18n.__ "Signup"}}}</a>
-  </p>
-</form>
+      <div class="form-row buttonWrapper">
+        <div class="form-group col-md-12">
+          <p class="account-message">
+            {{{i18n.__ "Don't have an account yet?"}}}
+            <a href="/auth/signup" class="btn btn-primary">{{{i18n.__ "Signup"}}}</a>
+          </p>
+        </div>
+      </div>
 
+    </form>
+
+  </div>
+</div>

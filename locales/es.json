@@ -61,5 +61,7 @@
 	"Edit pet": "Editar mascota",
 	"Found": "Encontrado",
 	"Edit post": "Editar post",
-	"Search": "Buscar"
+	"Search": "Buscar",
+	" Type the old password ": " Contraseña antigua ",
+	" Type the new password ": " Nueva contraseña "
 }

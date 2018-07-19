@@ -1,61 +1,81 @@
-<h2>{{{i18n.__ "Edit pet"}}}</h2>
-<form action="/private/animals/editAnimal/{{animal._id}}" method="POST" enctype="multipart/form-data">
+<div class="container newWrapper listWrapper">
 
-    <label for="species">{{{i18n.__ "Species"}}}</label>
-    <select name="species">
-        <option value="{{animal.species}}" selected>{{animal.species}}</option>
-        <option value="{{{i18n.__ "Dog"}}}">{{{i18n.__ "Dog"}}}</option>
-        <option value="{{{i18n.__ "Cat"}}}">{{{i18n.__ "Cat"}}}</option>
-    </select>
+    <h2>{{{i18n.__ "Edit pet"}}}</h2>
+    <div class="formWrapper">
+        <form action="/private/animals/editAnimal/{{animal._id}}" method="POST" enctype="multipart/form-data">
 
-    <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="species">{{{i18n.__ "Species"}}}</label>
+                    <select name="species">
+                        <option value="{{animal.species}}" selected>{{animal.species}}</option>
+                        <option value="{{{i18n.__ " Dog "}}}">{{{i18n.__ "Dog"}}}</option>
+                        <option value="{{{i18n.__ " Cat "}}}">{{{i18n.__ "Cat"}}}</option>
+                    </select>
+                </div>
 
-    <label for="breed">{{{i18n.__ "Breed"}}}</label>
-    <textarea name="breed" class="form-control">{{animal.breed}}</textarea>
+                <div class="form-group col-md-6">
+                    <label for="breed">{{{i18n.__ "Breed"}}}</label>
+                    <textarea name="breed" class="form-control">{{animal.breed}}</textarea>
+                </div>
+            </div>
 
-    <br>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="name">{{{i18n.__ "Name"}}}</label>
+                    <textarea name="name" class="form-control" required>{{animal.name}}</textarea>
+                </div>
 
-    <label for="name">{{{i18n.__ "Name"}}}</label>
-    <textarea name="name" class="form-control" required>{{animal.name}}</textarea>
+                <div class="form-group col-md-3">
+                    <label for="color">{{{i18n.__ "Color"}}}</label>
+                    <textarea name="color" class="form-control">{{animal.color}}</textarea>
+                </div>
 
-    <br>
+                <div class="form-group col-md-3">
+                    <label for="gender">{{{i18n.__ "Gender"}}}</label>
+                    <textarea name="gender" class="form-control">{{animal.gender}}</textarea>
+                </div>
 
-    <label for="color">{{{i18n.__ "Color"}}}</label>
-    <textarea name="color" class="form-control">{{animal.color}}</textarea>
+                <div class="form-group col-md-3">
+                    <label for="chip">{{{i18n.__ "Chip"}}}</label>
+                    <textarea name="chip" class="form-control">{{animal.chip}}</textarea>
+                </div>
+            </div>
 
-    <br>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="state">{{{i18n.__ "State"}}} </label>
+                    <select name="state">
+                        <option value="{{animal.state}}" selected>{{animal.state}}</option>
+                        <option value="Lost">{{{i18n.__ "Lost"}}}</option>
+                        <option value="Found">{{{i18n.__ "Found"}}}</option>
+                    </select>
+                </div>
+            </div>
 
-    <label for="gender">{{{i18n.__ "Gender"}}}</label>
-    <textarea name="gender" class="form-control">{{animal.gender}}</textarea>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="description">{{{i18n.__ "Description"}}}</label>
+                    <textarea name="description" class="form-control">{{animal.description}}</textarea>
+                </div>
+            </div>
 
-    <br>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="profilePic">{{{i18n.__ "Upload a picture"}}}</label>
+                    <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+                </div>
+            </div>
 
-    <label for="chip">{{{i18n.__ "Chip"}}}</label>
-    <textarea name="chip" class="form-control">{{animal.chip}}</textarea>
+            <br> {{#if message }}
+            <div class="error-message">{{ message }}</div>
+            {{/if}}
 
-    <br>
-
-    <label for="state">{{{i18n.__ "State"}}} </label>
-    <select name="state">
-        <option value="{{animal.state}}" selected>{{animal.state}}</option>
-        <option value="Lost">{{{i18n.__ "Lost"}}}</option>
-        <option value="Found">{{{i18n.__ "Found"}}}</option>
-    </select>
-
-    <br>
-
-    <label for="description">{{{i18n.__ "Description"}}}</label>
-    <textarea name="description" class="form-control">{{animal.description}}</textarea>
-
-    <br>
-
-    <label for="profilePic">{{{i18n.__ "Upload a picture"}}}</label>  
-    <input type="file" class="form-control-file" id="profilePic" name="profilePic">
-
-    <br> {{#if message }}
-    <div class="error-message">{{ message }}</div>
-    {{/if}}
-
-
-    <button class="btn btn-primary">{{{i18n.__ "Edit"}}}</button>
-</form>
+            <div class="form-row buttonWrapper">
+                <div class="form-group col-md-12">
+                    <button class="btn btn-primary">{{{i18n.__ "Edit"}}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,8 +1,18 @@
-<a href="/private/animals" class="btn btn-primary">{{{i18n.__ "My pets"}}}</a>
+<div class="container newWrapper listWrapper">
 
-<a href="/private/posts" class="btn btn-primary">{{{i18n.__ "My posts"}}}</a>
+    <p> Hello, {{ user.username }}. </p>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <a href="/private/animals" class="btn btn-primary">{{{i18n.__ "My pets"}}}</a>
+            <a href="/private/posts" class="btn btn-primary">{{{i18n.__ "My posts"}}}</a>
+        </div>
+    </div>
 
-<p> Hello, {{ user.username }}. </p>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <a href="/auth/settings" class="btn btn-primary">{{{i18n.__ "Settings"}}}</a>
+            <a href="/auth/logout" class="btn btn-primary">{{{i18n.__ "Log out"}}}</a>
+        </div>
+    </div>
 
-<a href="/auth/settings" class="btn btn-primary">{{{i18n.__ "Settings"}}}</a>
-<a href="/auth/logout" class="btn btn-primary">{{{i18n.__ "Log out"}}}</a>
+</div>

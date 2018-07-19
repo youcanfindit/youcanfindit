@@ -1,23 +1,40 @@
-<h2>{{{i18n.__ "Change your details"}}}</h2>
+<div class="container newWrapper listWrapper">
+  <h2>{{{i18n.__ "Change your details"}}}</h2>
 
-<form action="/auth/settings" method="POST" id="form-container" enctype="multipart/form-data">
-  <label for="email">{{{i18n.__ "Email address"}}}</label>  
-  <input id="email" type="text" name="email" placeholder="{{{i18n.__ "Email address"}}}">
+  <div class="formWrapper">
+    <form action="/auth/settings" method="POST" id="form-container" enctype="multipart/form-data">
 
-  <label for="password">{{{i18n.__ "Old password"}}}</label>
-  <input id="oldPassword" type="password" name="oldPassword" placeholder="{{{i18n.__ "Type the old password"}}}">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="password">{{{i18n.__ "Old password"}}}</label>
+          <input id="oldPassword" type="password" name="oldPassword" placeholder="{{{i18n.__ " Type the old password "}}}">
+        </div>
 
-  <label for="password">{{{i18n.__ "New password"}}}</label>
-  <input id="newPassword" type="password" name="newPassword" placeholder="{{{i18n.__ "Type the new password"}}}">
+        <div class="form-group col-md-6">
+          <label for="password">{{{i18n.__ "New password"}}}</label>
+          <input id="newPassword" type="password" name="newPassword" placeholder="{{{i18n.__ " Type the new password "}}}">
+        </div>
+      </div>
 
-  <label for="profilePic">{{{i18n.__ "Profile picture"}}}</label>  
-  <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="profilePic">{{{i18n.__ "Profile picture"}}}</label>
+          <input type="file" class="form-control-file" id="profilePic" name="profilePic">
+        </div>
+      </div>
 
+      {{#if message }}
+      <div class="error-message">
+        {{ message }}
+      </div>
+      {{/if}}
 
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
+      <div class="form-row buttonWrapper">
+        <div class="form-group col-md-12">
+          <button class="btn btn-primary">{{{i18n.__ "Change details"}}}</button>
+        </div>
+      </div>
 
-  <button class="btn btn-primary">{{{i18n.__ "Change details"}}}</button>
-
-</form>
+    </form>
+  </div>
+</div>
