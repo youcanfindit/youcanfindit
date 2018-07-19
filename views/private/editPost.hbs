@@ -1,38 +1,59 @@
-<h2>Edit post</h2>
-<form action="/private/posts/editPost/{{post._id}}" method="POST" id="form-container">
-  <label for="animal">Mascota</label>
-  <select name="animal">
-    <option value="{{post.animalId.name}}" selected>{{post.animalId.name}}</option>
-  </select>
+<div class="container newWrapper listWrapper">
+  <h2>{{{i18n.__ "Edit post"}}}</h2>
 
-  <br>
+  <form action="/private/posts/editPost/{{post._id}}" method="POST" id="form-container">
+    <div class="formWrapper">
 
-  <label for="description">Descripción</label>
-  <textarea name="description" class="form-control">{{post.description}}</textarea>
+      {{#if message }}
+      <div class="error-message">{{ message }}</div>
+      {{/if}}
 
-  <br>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="animal">Mascota</label>
+          <select name="animal">
+            <option value="{{post.animalId.name}}" selected>{{post.animalId.name}}</option>
+          </select>
+        </div>
 
-  <label for="date">Fecha de desaparición</label>
-  <input id="date" type="date" name="date" value="{{post.date}}"/>
-  <br>
+        <div class="form-group col-md-4">
+          <label for="location">Recompensa</label>
+          <input type="text" id="reward" name="reward" value="{{post.reward}}">
+        </div>
 
-  <label for="location">Ubicación aproximada</label>
-  <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" value="{{post.location.literal}}"/>
-  <input id="find" type="button" value="Buscar" />
-  <br>
-  <div style="height: 200px; width: 400px" id="post-location" class="edit"></div>
-  <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
-  <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
-  <br>
-  <label for="location">Recompensa</label>
-  <input type="text" id="reward" name="reward" value="{{post.reward}}">
-  <br>
-  <br>
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
+        <div class="form-group col-md-4">
+          <label for="date">Fecha de desaparición</label>
+          <input id="date" type="date" name="date" value="{{post.date}}" />
+        </div>
+      </div>
 
-  <br><br>
 
-  <button class="btn btn-primary">Edit post</button>
-</form>
+      <div class="form-row">
+        <div class="form-group col-md-9">
+          <label for="description">Descripción</label>
+          <textarea name="description" class="form-control">{{post.description}}</textarea>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="location">Ubicación aproximada</label>
+          <input id="geocomplete" type="text" name="literal" placeholder="Escribe una direccion" value="{{post.location.literal}}"
+          />
+          <input id="find" type="button" value="Buscar" />
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <div style="height: 200px; width: 400px" id="post-location" class="edit"></div>
+          <input type="hidden" id="latitude" name="lat" value="{{post.location.coordinates.[1]}}">
+          <input type="hidden" id="longitude" name="lng" value="{{post.location.coordinates.[0]}}">
+        </div>
+        <button class="btn btn-primary">Edit post</button>
+      </div>
+    </div>
+  </form>
+
+</div>

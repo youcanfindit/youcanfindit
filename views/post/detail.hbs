@@ -1,7 +1,7 @@
 <div class="container listWrapper">
   <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-6 mainCol">
       <div class="row">
         <div class="col-md-12 columns">
           <p>{{{i18n.__ "Owner"}}}: {{post.userId.username}}</p>
@@ -51,7 +51,7 @@
   </div>
 
   <div class="col-md-12">
-    <a href="/comment/new/{{post._id}}" class="btn btn-primary">{{{i18n.__ "New comment"}}}</a>
+    <a href="/comment/new/{{post._id}}" id="newComment" class="btn btn-primary">{{{i18n.__ "New comment"}}}</a>
   </div>
 
 </div>

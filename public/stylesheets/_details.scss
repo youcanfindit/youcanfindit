@@ -8,3 +8,13 @@
 .map{
     margin: 20px;
 }
+
+.mainCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+#newComment{
+    margin-top: 20px;
+}

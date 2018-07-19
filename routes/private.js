@@ -13,7 +13,7 @@ router.get("/animals", ensureLoggedIn("/auth/login"), (req, res, next) => {
   console.log(req.user.id);
   Animal.find({ userId: req.user.id })
   .then(animals => {
-    res.render("private/animals", { animals });
+    res.render("private/animals", { animals, i18n: res });
   });
 });
 
@@ -21,7 +21,7 @@ router.get("/animals/editAnimal/:id", ensureLoggedIn("/auth/login"), (req, res, 
     Animal.findById(req.params.id)
     .then(animal => {
       console.log(animal)
-      res.render("private/editAnimal", { animal });
+      res.render("private/editAnimal", { animal, i18n: res });
     });
 });
 
@@ -82,7 +82,7 @@ router.get("/posts", ensureLoggedIn("/auth/login"), (req, res, next) => {
         return;
       }
       console.log(posts)
-      res.render("private/posts", { posts });
+      res.render("private/posts", { posts, i18n: res });
   })
 });
 
@@ -92,7 +92,7 @@ router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next
   .populate('animalId')
   .then(post => {
     console.log(post)
-    res.render("private/editPost", { post });
+    res.render("private/editPost", { post, i18n: res });
   });
 });
 

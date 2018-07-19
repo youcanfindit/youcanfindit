@@ -18,6 +18,9 @@ footer {
   height: 60px;
   background-color: #f8f9fa !important; }
 
+.btn {
+  margin: 10px !important; }
+
 .listWrapper {
   margin: 50px auto !important;
   background-color: #dcebee !important;
@@ -40,6 +43,9 @@ footer {
   .images img {
     max-width: 100%;
     height: 200px; }
+
+.row {
+  margin-top: 50px !important; }
 
 .newWrapper {
   margin: 50px; }
@@ -70,5 +76,13 @@ input {
 
 .map {
   margin: 20px; }
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+
+#newComment {
+  margin-top: 20px; }
 
 /*# sourceMappingURL=style.css.map */
