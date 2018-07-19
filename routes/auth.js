@@ -64,7 +64,7 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
       if (err) {
         res.render("auth/signup", { message: "Something went wrong", i18n: res });
       } else {
-        res.redirect("/", { i18n: res });
+        res.redirect("/");
 
         let urlConfirmation = urlencode(hashConfirmation)
 
