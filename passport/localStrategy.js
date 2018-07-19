@@ -20,6 +20,11 @@ passport.use(new LocalStrategy((username, password, next) => {
       return;
     }
 
+    if (foundUser.status.toLowerCase() !== 'confirmed') {
+      next(null, false, { message: 'Mail not validated' })
+      return
+    }
+
     next(null, foundUser);
   });
 }));

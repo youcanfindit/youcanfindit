@@ -6,6 +6,8 @@ const multer = require("multer");
 // const upload = multer({ dest: "./public/uploads/users/" });
 const ensureLogin = require("connect-ensure-login");
 const uploadCloud = require("../config/cloudinary.js");
+const urlencode = require('urlencode')
+const nodemailer = require('nodemailer')
 
 
 // Bcrypt to encrypt passwords
@@ -46,13 +48,16 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
+    const hashConfirmation = bcrypt.hashSync(username, salt)
 
     const newUser = new User({
       username,
       password: hashPass,
       email,
       name,
-      profilePic: req.file.url
+      profilePic: req.file.url,
+      status: 'pending',
+      confirmationCode: hashConfirmation
     });
     console.log(newUser);
     newUser.save(err => {
@@ -134,5 +139,16 @@ authRoutes.post(
     );
   }
 );
+
+
+authRoutes.get('/confirm/:id', (req, res, next) => {
+  User.findOneAndUpdate({confirmationCode: urlencode.decode(req.params.id)}, {status: 'confirmed'})
+  .then(() => {
+    res.render('auth/confirm', {status: 'ok'})
+  })
+  .catch(() => {
+    res.render('auth/confirm', {status: 'ko'})
+  })
+})
 
 module.exports = authRoutes;
