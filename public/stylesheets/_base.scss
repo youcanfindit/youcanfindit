@@ -1,5 +1,9 @@
 body {
-    font-family: 'Times New Roman', Times, serif !important;
+    font-family: $font;
+}
+
+nav {
+  height: 80px;
 }
 
 .pictureSection{
@@ -17,9 +21,12 @@ body {
   }
 
 footer {
-    margin: 0;
-    height: 60px;
-    background-color: #f8f9fa!important;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100vw;
+  padding: 12px;
+  background-color: #f8f9fa!important;
 }
 
 .btn {
