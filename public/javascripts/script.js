@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('post-location') && $('#post-location').hasClass('detail')) {
     var myLatlng = new google.maps.LatLng($("input[name=lat]").val(),$("input[name=lng]").val());
     var mapOptions = {
-      zoom: 15,
+      zoom: 17,
       center: myLatlng,
       disableDefaultUI: true,
       draggable: false

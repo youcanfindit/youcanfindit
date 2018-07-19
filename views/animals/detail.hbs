@@ -1,10 +1,21 @@
-<p>{{{i18n.__ "Owner"}}}: {{animal.userId.username}}</p>
-<p>{{{i18n.__ "Name"}}}: {{animal.name}}</p>
-<p>{{{i18n.__ "Breed"}}}: {{animal.breed}}</p>
-<p>{{{i18n.__ "Color"}}}: {{animal.color}}</p>
-<p>{{{i18n.__ "Gender"}}}: {{animal.gender}}</p>
-<p>{{{i18n.__ "Chip"}}}: {{animal.chip}}</p>
-<p>{{{i18n.__ "Description"}}}: {{animal.description}}</p>
-<p>{{{i18n.__ "State"}}}: {{animal.state}}</p>
+<div class="container listWrapper">
+    <div class="row">
 
-<img src="{{profilePic}}" alt="{{animal.name}}">
+        <div class="col-md-6">
+
+            <p>{{{i18n.__ "Owner"}}}: {{animal.userId.username}}</p>
+            <p>{{{i18n.__ "Name"}}}: {{animal.name}}</p>
+            <p>{{{i18n.__ "Breed"}}}: {{animal.breed}}</p>
+            <p>{{{i18n.__ "Color"}}}: {{animal.color}}</p>
+            <p>{{{i18n.__ "Gender"}}}: {{animal.gender}}</p>
+            <p>{{{i18n.__ "Chip"}}}: {{animal.chip}}</p>
+            <p>{{{i18n.__ "Description"}}}: {{animal.description}}</p>
+            <p>{{{i18n.__ "State"}}}: {{animal.state}}</p>
+        </div>
+
+        <div class="images col-md-6">
+            <img src="{{animal.profilePic}}" alt="{{animal.name}}">
+        </div>
+    </div>
+
+</div>

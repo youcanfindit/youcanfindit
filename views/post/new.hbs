@@ -12,7 +12,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="animal">{{{i18n.__ "Choose your pet"}}}</label>
-          <select name="animal">
+          <select name="animal" class="btn btn-primary">
             <option value="" selected>{{{i18n.__ "Pet"}}}</option>
             {{#each animals}}
             <option value="{{this._id}}">{{this.name}}</option>
@@ -42,7 +42,7 @@
         <div class="form-group col-md-12">
           <label for="location">{{{i18n.__ "Location"}}}</label>
           <input id="geocomplete" type="text" name="literal" placeholder="Type an address" />
-          <input id="find" type="button" value="Buscar" />
+          <input id="find" type="button" value="Buscar" class="btn btn-primary"/>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
 
       <div class="form-row buttonWrapper">
         <div class="form-group col-md-12">
-          <button>{{{i18n.__ "Post"}}}</button>
+          <button class="btn btn-primary">{{{i18n.__ "Post"}}}</button>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
   <p>
     {{noAnimals}}
     <p>{{{i18n.__ "You haven't got any pets yet, create a new pet to post"}}}</p>
-    <a href="/animal/new">{{{i18n.__ "New pet"}}}</a>
+    <a href="/animal/new" class="btn btn-primary">{{{i18n.__ "New pet"}}}</a>
   </p>
 
   {{/if}}

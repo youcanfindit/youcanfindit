@@ -49,13 +49,12 @@ router.get("/", (req, res, next) => {
 router.get('/detail/:id', (req, res, next) => {
   Post.findById(req.params.id)
   .populate('userId', 'username')
-  .populate('animalId', 'name')
+  .populate('animalId')
   .exec((err, post) => {
     if (err) {
       next(err)
       return
     }
-
     Comment.find({postId: post._id})
     .populate('userId', 'username')
     .sort({updatedAt: -1})
