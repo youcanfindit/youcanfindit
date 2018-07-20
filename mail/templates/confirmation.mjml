@@ -11,7 +11,7 @@
   <mj-body background-color="#F2F2F2">
     <mj-section padding="20px 20px 0 20px" background-color="#FFFFFF">
       <mj-column width="100%">
-        <mj-text align="left" font-size="20px" font-weight="500">Finderpet</mj-text>
+        <mj-image src="https://finderpet.herokuapp.com/images/vlogo.png" width="210px" height="210px" alt="Finderpet" align="center" border="none" padding="0px"></mj-image>
       </mj-column>
     </mj-section>
     <mj-section padding="0 20px 0 20px" background-color="#FFFFFF">
