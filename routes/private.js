@@ -146,5 +146,25 @@ router.get(('/posts/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next)
   })
 })
 
+router.get(('/posts/closePost/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
+  const userId = req.user._id
+  const postId = req.params.id
+
+  let postInfo = {
+    status: 'closed'
+  }
+
+  Post.findById(postId)
+  .exec((err, post) => {
+    console.log(post)
+    if (roles.hasRole(req.user, 'admin') || roles.isOwner(req.user, post.userId)) {
+      Post.findByIdAndUpdate(postId, {$set: postInfo}, { new: true }).then(() => {
+        res.redirect(`/private/posts`)
+      })
+    } else {
+      res.redirect(`/private/posts`)
+    }
+  })
+})
 
 module.exports = router;
