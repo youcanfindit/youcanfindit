@@ -1,3 +1,5 @@
+//Comment routes file
+
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
@@ -6,6 +8,7 @@ const { ensureLoggedIn } = require("connect-ensure-login");
 const roles = require("../utils/roles");
 const { sendMail } = require('../mail/sendMail');
 
+//New comment vew route
 router.get("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const postId = req.params.id;
   Post.findById(postId)
@@ -15,6 +18,7 @@ router.get("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
     .catch();
 });
 
+//New comment post route
 router.post("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const userId = req.user._id;
   const postId = req.params.id;
@@ -35,7 +39,6 @@ router.post("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
       res.render("comment/new", {
         message: "Something went wrong. Try again later."
       });
-      console.log(err);
       return;
     } else {
       Post.findById(req.params.id)
@@ -72,12 +75,14 @@ router.post("/new/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   })
 })
 
+//Edit comment view route
 router.get("/edit/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   Comment.findById(req.params.id).then(post => {
     res.render(`comment/edit`, { post, i18n: res, active: 'posts' });
   });
 });
 
+//Edit comment post route
 router.post("/edit/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   let { comment } = req.body;
 
@@ -88,6 +93,7 @@ router.post("/edit/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
     .catch(error => {});
 });
 
+//Delete comment route
 router.get("/delete/:id", ensureLoggedIn("auth/login"), (req, res, next) => {
   const userId = req.user._id;
   const commentId = req.params.id;

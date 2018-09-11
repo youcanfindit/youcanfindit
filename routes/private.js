@@ -1,3 +1,5 @@
+//File with user private zone routes
+
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
@@ -8,15 +10,15 @@ const upload = multer({ dest: "./public/uploads/animals/" });
 const { ensureLoggedIn } = require("connect-ensure-login");
 const roles = require("../utils/roles");
 
-
+//Route that shows all the user animals
 router.get("/animals", ensureLoggedIn("/auth/login"), (req, res, next) => {
-  console.log(req.user.id);
   Animal.find({ userId: req.user.id })
   .then(animals => {
     res.render("private/animals", { animals, i18n: res });
   });
 });
 
+//Route that shows the animal editor view
 router.get("/animals/editAnimal/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
     Animal.findById(req.params.id)
     .then(animal => {
@@ -25,8 +27,8 @@ router.get("/animals/editAnimal/:id", ensureLoggedIn("/auth/login"), (req, res, 
     });
 });
 
+//Route that edits an animal
 router.post("/animals/editAnimal/:id", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
-    console.log(req.params.id)
     let id = req.params.id
     let { species, breed, name, color, gender, chip, state, description } = req.body;
     let animalInfo = {
@@ -52,27 +54,26 @@ router.post("/animals/editAnimal/:id", [upload.single("profilePic"), ensureLogge
     .catch(error => {
       console.log(error);
     });
-  });
+});
 
-  router.get(('/animals/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
-    const userId = req.user._id
-    const animalId = req.params.id
+//Route that deletes an animal
+router.get(('/animals/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
+  const userId = req.user._id
+  const animalId = req.params.id
 
-    Animal.findById(animalId)
-    .exec((err, animal) => {
-      console.log(animal)
-      if (roles.hasRole(req.user, 'admin') || roles.isOwner(req.user, animal.userId) || roles.isOwner(req.user, animal.userId)) {
-        Animal.findByIdAndRemove(animalId).then(() => {
-          res.redirect(`/private/animals`)
-        })
-      } else {
+  Animal.findById(animalId)
+  .exec((err, animal) => {
+    if (roles.hasRole(req.user, 'admin') || roles.isOwner(req.user, animal.userId) || roles.isOwner(req.user, animal.userId)) {
+      Animal.findByIdAndRemove(animalId).then(() => {
         res.redirect(`/private/animals`)
-      }
-    })
+      })
+    } else {
+      res.redirect(`/private/animals`)
+    }
   })
+})
 
-
-
+//Route that lists all the user posts
 router.get("/posts", ensureLoggedIn("/auth/login"), (req, res, next) => {
     Post.find({ userId: req.user.id })
     .populate("animalId")
@@ -81,12 +82,11 @@ router.get("/posts", ensureLoggedIn("/auth/login"), (req, res, next) => {
         next(err);
         return;
       }
-      console.log(posts)
       res.render("private/posts", { posts, i18n: res });
   })
 });
 
-
+//Route that shows the post editor view
 router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
   Post.findById(req.params.id)
   .populate('animalId')
@@ -96,7 +96,7 @@ router.get("/posts/editPost/:id", ensureLoggedIn("/auth/login"), (req, res, next
   });
 });
 
-
+//Route that edits a post
 router.post("/posts/editPost/:id", [upload.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
   console.log(req.params.id)
   let id = req.params.id
@@ -127,8 +127,7 @@ router.post("/posts/editPost/:id", [upload.single("profilePic"), ensureLoggedIn(
   });
 });
 
-
-
+//Route that deletes a post
 router.get(('/posts/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
   const userId = req.user._id
   const postId = req.params.id
@@ -146,6 +145,7 @@ router.get(('/posts/delete/:id'), ensureLoggedIn('auth/login'), (req, res, next)
   })
 })
 
+//Route that closes a post (animal found)
 router.get(('/posts/closePost/:id'), ensureLoggedIn('auth/login'), (req, res, next) => {
   const userId = req.user._id
   const postId = req.params.id
@@ -156,7 +156,6 @@ router.get(('/posts/closePost/:id'), ensureLoggedIn('auth/login'), (req, res, ne
 
   Post.findById(postId)
   .exec((err, post) => {
-    console.log(post)
     if (roles.hasRole(req.user, 'admin') || roles.isOwner(req.user, post.userId)) {
       Post.findByIdAndUpdate(postId, {$set: postInfo}, { new: true }).then(() => {
         res.redirect(`/private/posts`)

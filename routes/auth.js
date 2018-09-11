@@ -1,3 +1,5 @@
+//Authentication routes file
+
 const express = require("express");
 const passport = require("passport");
 const authRoutes = express.Router();
@@ -14,10 +16,12 @@ const { sendMail } = require('../mail/sendMail');
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+//Route that shows the login view
 authRoutes.get("/login", (req, res, next) => {
   res.render("auth/login", { message: req.flash("error"), i18n: res, active: 'login' });
 });
 
+//Login post route
 authRoutes.post(
   "/login",
   passport.authenticate("local", {
@@ -28,10 +32,12 @@ authRoutes.post(
   })
 );
 
+//Route that shows the signup route
 authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup", { i18n: res, active: 'signup' });
 });
 
+//Signup post route
 authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) => {
   const { username, password, email, name } = req.body;
 
@@ -59,7 +65,6 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
       status: 'pending',
       confirmationCode: hashConfirmation
     });
-    console.log(newUser);
     newUser.save(err => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong", i18n: res });
@@ -98,19 +103,23 @@ authRoutes.post("/signup", uploadCloud.single("profilePic"), (req, res, next) =>
   });
 });
 
+//Logout route
 authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
 
+//Route that shows the user profile view
 authRoutes.get("/profile", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("auth/profile", { user: req.user, i18n: res, active: 'profile' });
 });
 
+//Route that shows the user settings view
 authRoutes.get("/settings", ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render("auth/settings", { user: req.user, i18n: res });
 });
 
+//Settings post route
 authRoutes.post(
   "/settings",
   [uploadCloud.single("profilePic"), ensureLogin.ensureLoggedIn()],
@@ -121,13 +130,9 @@ authRoutes.post(
 
     if (req.body.oldPassword != "") {
       User.findById(req.user.id).then(user => {
-        console.log(req.user.id);
-        console.log(req.body.oldPassword);
-        console.log(user.password);
 
         const hashPass = bcrypt.hashSync(newPassword, salt);
         if (bcrypt.compareSync(oldPassword, user.password)) {
-          console.log("pass ok");
           password = hashPass;
 
           User.findByIdAndUpdate(
@@ -141,8 +146,6 @@ authRoutes.post(
               res.render("auth/settings", { message: "Something went wrong", i18n: res });
             }
           });
-        } else {
-          console.log("pass error");
         }
       });
     }
@@ -151,7 +154,6 @@ authRoutes.post(
       update.profilePic = req.file.url;
     }
 
-    console.log(update);
     User.findByIdAndUpdate(req.user.id, { $set: update }, { new: true }).then(
       () => {
         if (res) {
@@ -164,7 +166,7 @@ authRoutes.post(
   }
 );
 
-
+//Email validation route
 authRoutes.get('/confirm/:id', (req, res, next) => {
   User.findOneAndUpdate({confirmationCode: urlencode.decode(req.params.id)}, {status: 'confirmed'})
   .then(() => {

@@ -1,6 +1,9 @@
+//Animal model file
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+//Animal schema
 const animalSchema = new Schema(
   {
     species: { type: String, required: true },

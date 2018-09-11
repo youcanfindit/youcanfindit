@@ -1,8 +1,11 @@
+//Passport local strategies file
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User          = require('../models/User');
 const bcrypt        = require('bcrypt');
 
+//Function that validates login info
 passport.use(new LocalStrategy((username, password, next) => {
   User.findOne({ username }, (err, foundUser) => {
     if (err) {

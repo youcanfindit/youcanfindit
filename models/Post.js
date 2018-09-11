@@ -1,6 +1,9 @@
+//Post model file
+
 const mongoose = require('mongoose')
 const Schema   = mongoose.Schema
 
+//Post schema
 const postSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
   animalId: {type: Schema.Types.ObjectId, ref: 'Animal'},

@@ -86,6 +86,7 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 app.use(i18n.init);
 
+//Handlebars helpers
 hbs.registerHelper("ifUndefined", (value, options) => {
   if (arguments.length < 2)
     throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
@@ -105,16 +106,14 @@ hbs.registerHelper('if_equal', function(a, b, opts) {
 })
 
 hbs.registerHelper('__', function () {
-  console.log("hola")
   return i18n.__.apply(this, arguments);
 });
 hbs.registerHelper('__n', function () {
-  console.log("adios")
   return i18n.__n.apply(this, arguments);
 });
 
 
-// default value for title local
+//Default value for title local
 app.use((req, res, next) => {
   app.locals.title = "Finderpet";
   app.locals.user = req.user;
@@ -122,6 +121,7 @@ app.use((req, res, next) => {
   next();
 });
 
+//Routes config
 const index = require("./routes/index");
 app.use("/", index);
 

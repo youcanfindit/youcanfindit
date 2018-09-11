@@ -1,3 +1,5 @@
+//Post routes file
+
 const express = require('express')
 const router  = express.Router()
 const Post = require('../models/Post')
@@ -5,13 +7,12 @@ const Comment = require('../models/Comment')
 const Animal = require('../models/Animal')
 const {ensureLoggedIn} = require('connect-ensure-login')
 
-/* GET home page */
+//Route that shows all posts that match the query string
 router.get("/", (req, res, next) => {
-  //Guardamos los parametros
+  //Get all the parameters from the query string
   let species = req.query.species
   let status = req.query.status
   let sortBy = req.query.sortBy
-
   let sortQuery = {}
   if (sortBy != undefined && sortBy != '') {
     if (sortBy.toLowerCase() == 'asc' || sortBy.toLowerCase() == 'desc') {
@@ -19,6 +20,7 @@ router.get("/", (req, res, next) => {
     }
   }
 
+  //Get posts from the database
   Post.find()
     .populate("userId", "username")
     .populate("animalId")
@@ -45,7 +47,7 @@ router.get("/", (req, res, next) => {
   })
 })
 
-
+//Route that shows a post detail
 router.get('/detail/:id', (req, res, next) => {
   Post.findById(req.params.id)
   .populate('userId', 'username')
@@ -64,6 +66,7 @@ router.get('/detail/:id', (req, res, next) => {
   })
 });
 
+//Route that shows the new post view
 router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
   Animal.find({userId: req.user._id})
   .exec((err, animals) => {
@@ -81,11 +84,10 @@ router.get('/new', ensureLoggedIn('/auth/login'), (req, res, next) => {
   })
 })
 
+//Route that creates a new post
 router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   const userId = req.user._id;
-  console.log(userId);
   const animalId = req.body.animal;
-  console.log(animalId);
 
   let { description, date, lat, lng, literal, reward } = req.body;
 
@@ -120,7 +122,6 @@ router.post("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
         res.render("post/new", {
           message: "Something went wrong. Try again later.", i18n: res
         });
-        console.log(err);
         return;
       }
 

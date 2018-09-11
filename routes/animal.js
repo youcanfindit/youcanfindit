@@ -1,3 +1,5 @@
+//File with animal routes
+
 const express = require("express");
 const router = express.Router();
 const Animal = require("../models/Animal");
@@ -6,8 +8,9 @@ const multer = require("multer");
 // const upload = multer({ dest: "./public/uploads/animals/" });
 const uploadCloud = require("../config/cloudinary.js");
 
-
+//Route that shows all animals that match the query string
 router.get("/", (req, res, next) => {
+  //Get all the parameters from the query string
   let species = req.query.species
   let status = req.query.status
   let sortBy = req.query.sortBy
@@ -18,6 +21,7 @@ router.get("/", (req, res, next) => {
     }
   }
 
+  //Get animals from the database
   Animal.find()
     .populate("userId", "username")
     .sort(sortQuery)
@@ -39,12 +43,13 @@ router.get("/", (req, res, next) => {
           })
         }
       }
+
       res.render("animals/list", { animals, i18n: res, active: 'animals' });
     });
 });
 
+//Route that shows an animal detail
 router.get("/detail/:id", (req, res, next) => {
-  console.log(req.params);
   Animal.findById(req.params.id)
     .populate("userId", "username")
     .exec((err, animal) => {
@@ -53,20 +58,18 @@ router.get("/detail/:id", (req, res, next) => {
         return;
       }
 
-      console.log(animal);
       res.render("animals/detail", { animal, i18n: res });
     });
 });
 
+//Route that shows the new animal view
 router.get("/new", ensureLoggedIn("/auth/login"), (req, res, next) => {
   res.render("animals/new", { i18n: res, active: 'newanimal' });
 });
 
-
+//Route that creates a new animal
 router.post("/new", [uploadCloud.single("profilePic"), ensureLoggedIn("/auth/login")], (req, res, next) => {
     const userId = req.user._id;
-    console.log(userId);
-    console.log(req.body)
 
     let { species, breed, name, color, gender, chip, state, description } = req.body;
     const animalInfo = {
@@ -93,7 +96,6 @@ router.post("/new", [uploadCloud.single("profilePic"), ensureLoggedIn("/auth/log
         res.render("animal/new", {
           message: "Something went wrong. Try again later.", i18n: res
         });
-        console.log(err);
         return;
       }
 

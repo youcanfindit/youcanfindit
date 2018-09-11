@@ -1,9 +1,12 @@
+//Nodemailer send config
+
 const mjml = require('mjml');
 const hbs = require('handlebars');
 const fs = require('fs');
 const path = require('path');
 const {transport} =  require('./transporter');
 
+//Function that sends a mail
 const sendMail = (to, subject, templateVariable, template) => {
     const templateFile = path.join(__dirname, `./templates/${template}.mjml`);
     const mjmlTemplate = fs.readFileSync(templateFile,'utf8');
